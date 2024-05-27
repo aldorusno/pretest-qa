@@ -1,7 +1,9 @@
+Testing made with javascript
+
 How to test API
 
 What we need :
--NPM
+-NPM (Node.js)
 
 Install through cmd
 @babel/cli
