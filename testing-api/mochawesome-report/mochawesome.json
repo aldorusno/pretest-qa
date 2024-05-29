@@ -5,9 +5,9 @@
     "passes": 4,
     "pending": 0,
     "failures": 4,
-    "start": "2024-05-26T22:18:12.994Z",
-    "end": "2024-05-26T22:18:17.655Z",
-    "duration": 4661,
+    "start": "2024-05-29T07:18:24.926Z",
+    "end": "2024-05-29T07:18:28.287Z",
+    "duration": 3361,
     "testsRegistered": 8,
     "passPercent": 50,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "c8e8c1f0-4f4e-48d3-bf42-f423edaae354",
+      "uuid": "3540734d-799a-4233-a98a-9f25732d21eb",
       "title": "",
       "fullFile": "",
       "file": "",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "c2ddd5e4-91a7-4e12-86ee-4efbabe02a16",
+          "uuid": "ec21214c-e05b-445b-8c3c-b61a428b2cf5",
           "title": "Positive Test",
           "fullFile": "C:\\Users\\LENOVO\\Desktop\\pretest-qa\\testing-api\\test\\users.js",
           "file": "\\test\\users.js",
@@ -36,7 +36,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "71363266-5985-4777-af6d-aa01238703af",
+              "uuid": "6ac7d0ed-3546-4b59-b635-6abf88794330",
               "title": "POST",
               "fullFile": "C:\\Users\\LENOVO\\Desktop\\pretest-qa\\testing-api\\test\\users.js",
               "file": "\\test\\users.js",
@@ -47,7 +47,7 @@
                   "title": "/users",
                   "fullTitle": "Positive Test POST /users",
                   "timedOut": false,
-                  "duration": 519,
+                  "duration": 545,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -56,26 +56,26 @@
                   "context": null,
                   "code": "const data = {\n    email: `test${Math.floor(Math.random() * 9999)}@gmail.com`,\n    name: 'test1',\n    gender: 'male',\n    status: 'active',\n};\nreturn request\n    .post('users')\n    .set('Authorization',`Bearer ${TOKEN}`)\n    .send(data)\n    .then((res)=>{\n        console.log(res.body);\n        //Verify data yang di-Post sama dengan data yang dikirm\n        expect(res.body.data).to.deep.include(data);\n        //Set userId dengan id user yang sudah dibuat\n        userId = res.body.data.id;\n    });",
                   "err": {},
-                  "uuid": "7d0aad6c-f874-4c5c-819f-77ddfda043d6",
-                  "parentUUID": "71363266-5985-4777-af6d-aa01238703af",
+                  "uuid": "89646e9c-a2d6-4d37-a580-4e5073e30281",
+                  "parentUUID": "6ac7d0ed-3546-4b59-b635-6abf88794330",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "7d0aad6c-f874-4c5c-819f-77ddfda043d6"
+                "89646e9c-a2d6-4d37-a580-4e5073e30281"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 519,
+              "duration": 545,
               "root": false,
               "rootEmpty": false,
               "_timeout": 5000
             },
             {
-              "uuid": "a350e7ea-899d-43ab-a17a-fd903c02a1b6",
+              "uuid": "f94309ce-5888-4a3a-8196-8ed60cf28274",
               "title": "GET",
               "fullFile": "C:\\Users\\LENOVO\\Desktop\\pretest-qa\\testing-api\\test\\users.js",
               "file": "\\test\\users.js",
@@ -86,7 +86,7 @@
                   "title": "GET /users/:id",
                   "fullTitle": "Positive Test GET GET /users/:id",
                   "timedOut": false,
-                  "duration": 594,
+                  "duration": 192,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -95,26 +95,26 @@
                   "context": null,
                   "code": "return request.get(`users/${userId}?access-token=${TOKEN}`).then((res) => {\n//Verify id yg dicari sama dengan id yang diinput\nexpect(res.body.data.id).to.be.eq(userId);\n});",
                   "err": {},
-                  "uuid": "d33bcfff-57ff-42d7-a36f-1da450309e52",
-                  "parentUUID": "a350e7ea-899d-43ab-a17a-fd903c02a1b6",
+                  "uuid": "2c2fa162-fd66-4db1-b6a5-e081568485b4",
+                  "parentUUID": "f94309ce-5888-4a3a-8196-8ed60cf28274",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "d33bcfff-57ff-42d7-a36f-1da450309e52"
+                "2c2fa162-fd66-4db1-b6a5-e081568485b4"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 594,
+              "duration": 192,
               "root": false,
               "rootEmpty": false,
               "_timeout": 5000
             },
             {
-              "uuid": "2e9c551a-df6f-4afa-8672-d2ddaaaadf6d",
+              "uuid": "84bf8f9d-789f-4110-bbdd-1ee0ef1873bb",
               "title": "PUT",
               "fullFile": "C:\\Users\\LENOVO\\Desktop\\pretest-qa\\testing-api\\test\\users.js",
               "file": "\\test\\users.js",
@@ -125,7 +125,7 @@
                   "title": "/users/:id",
                   "fullTitle": "Positive Test PUT /users/:id",
                   "timedOut": false,
-                  "duration": 704,
+                  "duration": 461,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -134,26 +134,26 @@
                   "context": null,
                   "code": "const data = {\nname: `test${Math.floor(Math.random() * 9999)}`,\n};\n        \nreturn request\n.put(`users/${userId}`)\n.set('Authorization', `Bearer ${TOKEN}`)\n.send(data)\n.then((res) => {\n    console.log(res.body);\n    //Verify data yang di-update sama dengan data yg dikirim\n    expect(res.body.data).to.deep.include(data);\n});",
                   "err": {},
-                  "uuid": "75073636-49f4-4756-b18c-474aad257bf9",
-                  "parentUUID": "2e9c551a-df6f-4afa-8672-d2ddaaaadf6d",
+                  "uuid": "c935175c-0b99-4427-a893-02e0254f3f9e",
+                  "parentUUID": "84bf8f9d-789f-4110-bbdd-1ee0ef1873bb",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "75073636-49f4-4756-b18c-474aad257bf9"
+                "c935175c-0b99-4427-a893-02e0254f3f9e"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 704,
+              "duration": 461,
               "root": false,
               "rootEmpty": false,
               "_timeout": 5000
             },
             {
-              "uuid": "9bf5f829-60fc-4731-a58f-3349747d3f29",
+              "uuid": "12f74fda-ef72-46c2-b6f1-9e083a4dcc2e",
               "title": "DELETE",
               "fullFile": "C:\\Users\\LENOVO\\Desktop\\pretest-qa\\testing-api\\test\\users.js",
               "file": "\\test\\users.js",
@@ -164,7 +164,7 @@
                   "title": "/users/:id",
                   "fullTitle": "Positive Test DELETE /users/:id",
                   "timedOut": false,
-                  "duration": 913,
+                  "duration": 567,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -173,20 +173,20 @@
                   "context": null,
                   "code": "return request\n.delete(`users/${userId}`)\n.set('Authorization', `Bearer ${TOKEN}`)\n.then((res) => {\n    console.log(res.body);\n    //Verify data yang dicari by Id tadi sudah terhapus\n    expect(res.body.data).to.be.eq(null);\n});",
                   "err": {},
-                  "uuid": "72de271c-9b31-491b-92e4-f94b5c3aa8f5",
-                  "parentUUID": "9bf5f829-60fc-4731-a58f-3349747d3f29",
+                  "uuid": "008da34f-22eb-487d-ae52-22c232a53070",
+                  "parentUUID": "12f74fda-ef72-46c2-b6f1-9e083a4dcc2e",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "72de271c-9b31-491b-92e4-f94b5c3aa8f5"
+                "008da34f-22eb-487d-ae52-22c232a53070"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 913,
+              "duration": 567,
               "root": false,
               "rootEmpty": false,
               "_timeout": 5000
@@ -202,7 +202,7 @@
           "_timeout": 5000
         },
         {
-          "uuid": "a7cdfe34-c17b-43d2-835b-f1a3c01252d2",
+          "uuid": "2f78e329-d0df-4e76-8595-3077f128dda0",
           "title": "Negative Test",
           "fullFile": "C:\\Users\\LENOVO\\Desktop\\pretest-qa\\testing-api\\test\\users.js",
           "file": "\\test\\users.js",
@@ -211,7 +211,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "d2cd6773-3738-441e-9c17-4b1adb17e681",
+              "uuid": "72fa39e9-92bf-4a30-8926-299b3b899803",
               "title": "POST",
               "fullFile": "C:\\Users\\LENOVO\\Desktop\\pretest-qa\\testing-api\\test\\users.js",
               "file": "\\test\\users.js",
@@ -222,7 +222,7 @@
                   "title": "/users",
                   "fullTitle": "Negative Test POST /users",
                   "timedOut": false,
-                  "duration": 603,
+                  "duration": 632,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -235,8 +235,8 @@
                     "estack": "AssertionError: expected [ { field: 'email', …(1) } ] to deep include { email: '', name: 'test1', …(2) }\n    at file:///C:/Users/LENOVO/Desktop/pretest-qa/testing-api/test/users.js:102:51\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
                     "diff": null
                   },
-                  "uuid": "7c7c295d-724e-4ed2-a191-465e256f360a",
-                  "parentUUID": "d2cd6773-3738-441e-9c17-4b1adb17e681",
+                  "uuid": "a11255fe-e046-43ee-85d1-bb3c8de92aff",
+                  "parentUUID": "72fa39e9-92bf-4a30-8926-299b3b899803",
                   "isHook": false,
                   "skipped": false
                 }
@@ -244,17 +244,17 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "7c7c295d-724e-4ed2-a191-465e256f360a"
+                "a11255fe-e046-43ee-85d1-bb3c8de92aff"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 603,
+              "duration": 632,
               "root": false,
               "rootEmpty": false,
               "_timeout": 5000
             },
             {
-              "uuid": "1b80ef2a-6bff-4ef3-9524-1860f75fa526",
+              "uuid": "35c50b0b-3885-41f8-9fca-5bb94403bfbf",
               "title": "GET",
               "fullFile": "C:\\Users\\LENOVO\\Desktop\\pretest-qa\\testing-api\\test\\users.js",
               "file": "\\test\\users.js",
@@ -265,7 +265,7 @@
                   "title": "GET /users/:id",
                   "fullTitle": "Negative Test GET GET /users/:id",
                   "timedOut": false,
-                  "duration": 610,
+                  "duration": 317,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -278,8 +278,8 @@
                     "estack": "AssertionError: expected undefined to equal null\n    at file:///C:/Users/LENOVO/Desktop/pretest-qa/testing-api/test/users.js:115:44\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
                     "diff": null
                   },
-                  "uuid": "6398f51c-37db-4015-97b2-83a244f602a9",
-                  "parentUUID": "1b80ef2a-6bff-4ef3-9524-1860f75fa526",
+                  "uuid": "0ef424c1-d180-4724-99d0-fbbb7ae5860e",
+                  "parentUUID": "35c50b0b-3885-41f8-9fca-5bb94403bfbf",
                   "isHook": false,
                   "skipped": false
                 }
@@ -287,17 +287,17 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "6398f51c-37db-4015-97b2-83a244f602a9"
+                "0ef424c1-d180-4724-99d0-fbbb7ae5860e"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 610,
+              "duration": 317,
               "root": false,
               "rootEmpty": false,
               "_timeout": 5000
             },
             {
-              "uuid": "4559aa99-11c1-4c5d-83e3-e0d077919cae",
+              "uuid": "70bfab0a-fcd7-40fe-b4fb-3108d0aa8a65",
               "title": "PUT",
               "fullFile": "C:\\Users\\LENOVO\\Desktop\\pretest-qa\\testing-api\\test\\users.js",
               "file": "\\test\\users.js",
@@ -308,7 +308,7 @@
                   "title": "/users/:id",
                   "fullTitle": "Negative Test PUT /users/:id",
                   "timedOut": false,
-                  "duration": 325,
+                  "duration": 310,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -321,8 +321,8 @@
                     "estack": "AssertionError: expected { message: 'Resource not found' } to have deep property 'name'\n    at file:///C:/Users/LENOVO/Desktop/pretest-qa/testing-api/test/users.js:134:47\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
                     "diff": null
                   },
-                  "uuid": "ed5afb43-72c6-46d9-a1a2-135f410854a0",
-                  "parentUUID": "4559aa99-11c1-4c5d-83e3-e0d077919cae",
+                  "uuid": "5c37184b-2858-4081-9937-11a93c6ea26f",
+                  "parentUUID": "70bfab0a-fcd7-40fe-b4fb-3108d0aa8a65",
                   "isHook": false,
                   "skipped": false
                 }
@@ -330,17 +330,17 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "ed5afb43-72c6-46d9-a1a2-135f410854a0"
+                "5c37184b-2858-4081-9937-11a93c6ea26f"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 325,
+              "duration": 310,
               "root": false,
               "rootEmpty": false,
               "_timeout": 5000
             },
             {
-              "uuid": "ad2741e5-4476-47b0-9d7c-0740e2688579",
+              "uuid": "cbeece4a-6776-4511-a0ba-a11f07ae94a5",
               "title": "DELETE",
               "fullFile": "C:\\Users\\LENOVO\\Desktop\\pretest-qa\\testing-api\\test\\users.js",
               "file": "\\test\\users.js",
@@ -351,7 +351,7 @@
                   "title": "/users/:id",
                   "fullTitle": "Negative Test DELETE /users/:id",
                   "timedOut": false,
-                  "duration": 340,
+                  "duration": 306,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -364,8 +364,8 @@
                     "estack": "AssertionError: expected { message: 'Resource not found' } to equal null\n    at file:///C:/Users/LENOVO/Desktop/pretest-qa/testing-api/test/users.js:147:45\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
                     "diff": null
                   },
-                  "uuid": "98314ac9-5f5f-44e1-a81d-661ba8960e63",
-                  "parentUUID": "ad2741e5-4476-47b0-9d7c-0740e2688579",
+                  "uuid": "abaa0d97-754c-472f-a28b-70953b712987",
+                  "parentUUID": "cbeece4a-6776-4511-a0ba-a11f07ae94a5",
                   "isHook": false,
                   "skipped": false
                 }
@@ -373,11 +373,11 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "98314ac9-5f5f-44e1-a81d-661ba8960e63"
+                "abaa0d97-754c-472f-a28b-70953b712987"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 340,
+              "duration": 306,
               "root": false,
               "rootEmpty": false,
               "_timeout": 5000

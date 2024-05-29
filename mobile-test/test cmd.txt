@@ -1,0 +1,1598 @@
+//android.view.View[@content-desc="Login"]
+
+//android.widget.EditText[@content-desc="input-email"]
+
+//android.widget.EditText[@content-desc="input-password"]
+
+//android.view.ViewGroup[@content-desc="button-LOGIN"]/android.view.ViewGroup
+
+Microsoft Windows [Version 10.0.19045.4412]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\LENOVO>adb
+Android Debug Bridge version 1.0.41
+Version 35.0.1-11580240
+Installed as C:\Users\LENOVO\AppData\Local\Android\Sdk\platform-tools\adb.exe
+Running on Windows 10.0.19045
+
+global options:
+ -a                       listen on all network interfaces, not just localhost
+ -d                       use USB device (error if multiple devices connected)
+ -e                       use TCP/IP device (error if multiple TCP/IP devices available)
+ -s SERIAL                use device with given serial (overrides $ANDROID_SERIAL)
+ -t ID                    use device with given transport id
+ -H                       name of adb server host [default=localhost]
+ -P                       port of adb server [default=5037]
+ -L SOCKET                listen on given socket for adb server [default=tcp:localhost:5037]
+ --one-device SERIAL|USB  only allowed with 'start-server' or 'server nodaemon', server will only connect to one USB device, specified by a serial number or USB device address.
+ --exit-on-write-error    exit if stdout is closed
+
+general commands:
+ devices [-l]             list connected devices (-l for long output)
+ help                     show this help message
+ version                  show version num
+
+networking:
+ connect HOST[:PORT]      connect to a device via TCP/IP [default port=5555]
+ disconnect [HOST[:PORT]]
+     disconnect from given TCP/IP device [default port=5555], or all
+ pair HOST[:PORT] [PAIRING CODE]
+     pair with a device for secure TCP/IP communication
+ forward --list           list all forward socket connections
+ forward [--no-rebind] LOCAL REMOTE
+     forward socket connection using:
+       tcp:<port> (<local> may be "tcp:0" to pick any open port)
+       localabstract:<unix domain socket name>
+       localreserved:<unix domain socket name>
+       localfilesystem:<unix domain socket name>
+       dev:<character device name>
+       jdwp:<process pid> (remote only)
+       vsock:<CID>:<port> (remote only)
+       acceptfd:<fd> (listen only)
+ forward --remove LOCAL   remove specific forward socket connection
+ forward --remove-all     remove all forward socket connections
+ reverse --list           list all reverse socket connections from device
+ reverse [--no-rebind] REMOTE LOCAL
+     reverse socket connection using:
+       tcp:<port> (<remote> may be "tcp:0" to pick any open port)
+       localabstract:<unix domain socket name>
+       localreserved:<unix domain socket name>
+       localfilesystem:<unix domain socket name>
+ reverse --remove REMOTE  remove specific reverse socket connection
+ reverse --remove-all     remove all reverse socket connections from device
+ mdns check               check if mdns discovery is available
+ mdns services            list all discovered services
+
+file transfer:
+ push [--sync] [-z ALGORITHM] [-Z] LOCAL... REMOTE
+     copy local files/directories to device
+     --sync: only push files that have different timestamps on the host than the device
+     -n: dry run: push files to device without storing to the filesystem
+     -z: enable compression with a specified algorithm (any/none/brotli/lz4/zstd)
+     -Z: disable compression
+ pull [-a] [-z ALGORITHM] [-Z] REMOTE... LOCAL
+     copy files/dirs from device
+     -a: preserve file timestamp and mode
+     -z: enable compression with a specified algorithm (any/none/brotli/lz4/zstd)
+     -Z: disable compression
+ sync [-l] [-z ALGORITHM] [-Z] [all|data|odm|oem|product|system|system_ext|vendor]
+     sync a local build from $ANDROID_PRODUCT_OUT to the device (default all)
+     -n: dry run: push files to device without storing to the filesystem
+     -l: list files that would be copied, but don't copy them
+     -z: enable compression with a specified algorithm (any/none/brotli/lz4/zstd)
+     -Z: disable compression
+
+shell:
+ shell [-e ESCAPE] [-n] [-Tt] [-x] [COMMAND...]
+     run remote shell command (interactive shell if no command given)
+     -e: choose escape character, or "none"; default '~'
+     -n: don't read from stdin
+     -T: disable pty allocation
+     -t: allocate a pty if on a tty (-tt: force pty allocation)
+     -x: disable remote exit codes and stdout/stderr separation
+ emu COMMAND              run emulator console command
+
+app installation (see also `adb shell cmd package help`):
+ install [-lrtsdg] [--instant] PACKAGE
+     push a single package to the device and install it
+ install-multiple [-lrtsdpg] [--instant] PACKAGE...
+     push multiple APKs to the device for a single package and install them
+ install-multi-package [-lrtsdpg] [--instant] PACKAGE...
+     push one or more packages to the device and install them atomically
+     -r: replace existing application
+     -t: allow test packages
+     -d: allow version code downgrade (debuggable packages only)
+     -p: partial application install (install-multiple only)
+     -g: grant all runtime permissions
+     --abi ABI: override platform's default ABI
+     --instant: cause the app to be installed as an ephemeral install app
+     --no-streaming: always push APK to device and invoke Package Manager as separate steps
+     --streaming: force streaming APK directly into Package Manager
+     --fastdeploy: use fast deploy
+     --no-fastdeploy: prevent use of fast deploy
+     --force-agent: force update of deployment agent when using fast deploy
+     --date-check-agent: update deployment agent when local version is newer and using fast deploy
+     --version-check-agent: update deployment agent when local version has different version code and using fast deploy
+     (See also `adb shell pm help` for more options.)
+ uninstall [-k] PACKAGE
+     remove this app package from the device
+     '-k': keep the data and cache directories
+
+debugging:
+ bugreport [PATH]
+     write bugreport to given PATH [default=bugreport.zip];
+     if PATH is a directory, the bug report is saved in that directory.
+     devices that don't support zipped bug reports output to stdout.
+ jdwp                     list pids of processes hosting a JDWP transport
+ logcat                   show device log (logcat --help for more)
+
+security:
+ disable-verity           disable dm-verity checking on userdebug builds
+ enable-verity            re-enable dm-verity checking on userdebug builds
+ keygen FILE
+     generate adb public/private key; private key stored in FILE,
+
+scripting:
+ wait-for[-TRANSPORT]-STATE...
+     wait for device to be in a given state
+     STATE: device, recovery, rescue, sideload, bootloader, or disconnect
+     TRANSPORT: usb, local, or any [default=any]
+ get-state                print offline | bootloader | device
+ get-serialno             print <serial-number>
+ get-devpath              print <device-path>
+ remount [-R]
+      remount partitions read-write. if a reboot is required, -R will
+      will automatically reboot the device.
+ reboot [bootloader|recovery|sideload|sideload-auto-reboot]
+     reboot the device; defaults to booting system image but
+     supports bootloader and recovery too. sideload reboots
+     into recovery and automatically starts sideload mode,
+     sideload-auto-reboot is the same but reboots after sideloading.
+ sideload OTAPACKAGE      sideload the given full OTA package
+ root                     restart adbd with root permissions
+ unroot                   restart adbd without root permissions
+ usb                      restart adbd listening on USB
+ tcpip PORT               restart adbd listening on TCP on PORT
+
+internal debugging:
+ start-server             ensure that there is a server running
+ kill-server              kill the server if it is running
+ reconnect                kick connection from host side to force reconnect
+ reconnect device         kick connection from device side to force reconnect
+ reconnect offline        reset offline/unauthorized devices to force reconnect
+
+usb:
+ attach                   attach a detached USB device
+ detach                   detach from a USB device to allow use by other processes
+environment variables:
+ $ADB_TRACE
+     comma/space separated list of debug info to log:
+     all,adb,sockets,packets,rwx,usb,sync,sysdeps,transport,jdwp
+ $ADB_VENDOR_KEYS         colon-separated list of keys (files or directories)
+ $ANDROID_SERIAL          serial number to connect to (see -s)
+ $ANDROID_LOG_TAGS        tags to be used by logcat (see logcat --help)
+ $ADB_LOCAL_TRANSPORT_MAX_PORT max emulator scan port (default 5585, 16 emus)
+ $ADB_MDNS_AUTO_CONNECT   comma-separated list of mdns services to allow auto-connect (default adb-tls-connect)
+
+Online documentation: https://android.googlesource.com/platform/packages/modules/adb/+/refs/heads/main/docs/user/adb.1.md
+
+
+C:\Users\LENOVO>adb device
+adb.exe: unknown command device
+
+C:\Users\LENOVO>adb devices
+List of devices attached
+emulator-5554   authorizing
+
+
+C:\Users\LENOVO>adb devices
+List of devices attached
+emulator-5554   authorizing
+
+
+C:\Users\LENOVO>adb devices
+List of devices attached
+emulator-5554   device
+
+
+C:\Users\LENOVO>cd desktop
+
+C:\Users\LENOVO\Desktop>mkdirtest-mobile
+'mkdirtest-mobile' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\LENOVO\Desktop>mkdir test-mobile
+A subdirectory or file test-mobile already exists.
+
+C:\Users\LENOVO\Desktop>mkdir mobile-test
+
+C:\Users\LENOVO\Desktop>mkdir mobile-test
+A subdirectory or file mobile-test already exists.
+
+C:\Users\LENOVO\Desktop>cd mobile-test
+
+C:\Users\LENOVO\Desktop\mobile-test>npm init wdio
+
+                 -:...........................-:.
+                 +                              +
+              `` +      `...`        `...`      + `
+            ./+/ +    .:://:::`    `::///::`  ` + ++/.
+           .+oo+ +    /:+ooo+-/    /-+ooo+-/ ./ + +oo+.
+           -ooo+ +    /-+ooo+-/    /-+ooo+-/ .: + +ooo.
+            -+o+ +    `::///:-`    `::///::`    + +o+-
+             ``. /.     `````        `````     .: .``
+                  .----------------------------.
+           `-::::::::::::::::::::::::::::::::::::::::-`
+          .+oooo/:------------------------------:/oooo+.
+      `.--/oooo-                                  :oooo/--.`
+    .::-``:oooo`                                  .oooo-``-::.
+  ./-`    -oooo`--.: :.--                         .oooo-    `-/.
+ -/`    `-/oooo////////////////////////////////////oooo/.`    `/-
+`+`   `/+oooooooooooooooooooooooooooooooooooooooooooooooo+:`   .+`
+-/    +o/.:oooooooooooooooooooooooooooooooooooooooooooo:-/o/    +.
+-/   .o+  -oooosoooososssssooooo------------------:oooo- `oo`   +.
+-/   .o+  -oooodooohyyssosshoooo`                 .oooo-  oo.   +.
+-/   .o+  -oooodooysdooooooyyooo` `.--.``     .:::-oooo-  oo.   +.
+-/   .o+  -oooodoyyodsoooooyyooo.//-..-:/:.`.//.`./oooo-  oo.   +.
+-/   .o+  -oooohsyoooyysssysoooo+-`     `-:::.    .oooo-  oo.   +.
+-/   .o+  -ooooosooooooosooooooo+//////////////////oooo-  oo.   +.
+-/   .o+  -oooooooooooooooooooooooooooooooooooooooooooo-  oo.   +.
+-/   .o+  -oooooooooooooooooooooooooooooooooooooooooooo-  oo.   +.
+-+////o+` -oooo---:///:----://::------------------:oooo- `oo////+-
++ooooooo/`-oooo``:-```.:`.:.`.+/-    .::::::::::` .oooo-`+ooooooo+
+oooooooo+`-oooo`-- `/` .:+  -/-`/`   .::::::::::  .oooo-.+oooooooo
++-/+://-/ -oooo-`:`.o-`:.:-````.:    .///:``````  -oooo-`/-//:+:-+
+: :..--:-:.+ooo+/://o+/-.-:////:-....-::::-....--/+ooo+.:.:--.-- /
+- /./`-:-` .:///+/ooooo/+///////////////+++ooooo/+///:. .-:.`+./ :
+:-:/.           :`ooooo`/`              .:.ooooo :           ./---
+                :`ooooo`/`              .:.ooooo :
+                :`ooooo./`              .:-ooooo :
+                :`ooooo./`              .:-ooooo :
+            `...:-+++++:/.              ./:+++++-:...`
+           :-.````````/../              /.-:````````.:-
+          -/::::::::://:/+             `+/:+::::::::::+.
+          :oooooooooooo++/              +++oooooooooooo-
+
+                           Webdriver.IO
+              Next-gen browser and mobile automation
+                    test framework for Node.js
+
+
+===============================
+🤖 WDIO Configuration Wizard 🧙
+===============================
+
+? A project named "mobile-test" was detected at "C:\Users\LENOVO\Desktop\mobile-test", correct? Yes
+? What type of testing would you like to do? E2E Testing - of Web or Mobile Applications
+? Where is your automation backend located? On my local machine
+? Which environment you would like to automate? Mobile - native, hybrid and mobile web apps, on Android or iOS
+? Which mobile environment you'ld like to automate? Android - native, hybrid and mobile web apps, tested on emulators
+and real devices
+    > using UiAutomator2 (https://www.npmjs.com/package/appium-uiautomator2-driver)
+? Which framework do you want to use? Mocha (https://mochajs.org/)
+? Do you want to use a compiler? No!
+? Do you want WebdriverIO to autogenerate some test files? Yes
+? What should be the location of your spec files? C:\Users\LENOVO\Desktop\mobile-test\test\specs\**\*.js
+? Do you want to use page objects (https://martinfowler.com/bliki/PageObject.html)? Yes
+? Where are your page objects located? C:\Users\LENOVO\Desktop\mobile-test\test\pageobjects\**\*.js
+? Which reporter do you want to use? spec, allure
+? Do you want to add a plugin to your test setup?
+? Would you like to include Visual Testing to your setup? For more information see
+https://webdriver.io/docs/visual-testing! No
+? Do you want to add a service to your test setup? appium
+? Do you want me to run `npm install` Yes
+
+
+Installing packages using npm:
+- @wdio/local-runner@latest
+- @wdio/mocha-framework@latest
+- @wdio/spec-reporter@latest
+- @wdio/allure-reporter@latest
+- @wdio/appium-service@latest
+- appium-uiautomator2-driver
+
+
+npm WARN deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm WARN deprecated npmlog@7.0.1: This package is no longer supported.
+npm WARN deprecated npmlog@7.0.1: This package is no longer supported.
+npm WARN deprecated rimraf@2.4.5: Rimraf versions prior to v4 are no longer supported
+npm WARN deprecated no-case@4.0.0: Use `change-case`
+npm WARN deprecated param-case@4.0.0: Use `change-case`
+npm WARN deprecated glob@8.1.0: Glob versions prior to v9 are no longer supported
+npm WARN deprecated glob@6.0.4: Glob versions prior to v9 are no longer supported
+npm WARN deprecated glob@7.1.7: Glob versions prior to v9 are no longer supported
+npm WARN deprecated are-we-there-yet@4.0.2: This package is no longer supported.
+npm WARN deprecated are-we-there-yet@4.0.2: This package is no longer supported.
+npm WARN deprecated gauge@5.0.2: This package is no longer supported.
+npm WARN deprecated gauge@5.0.2: This package is no longer supported.
+npm WARN deprecated fstream@1.0.12: This package is no longer supported.
+
+added 1190 packages, and audited 1191 packages in 10m
+
+102 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+✔ Success!
+
+Creating a WebdriverIO config file...
+✔ Success!
+
+Autogenerating test files...
+✔ Success!
+
+Adding "wdio" script to package.json
+⚠️  Couldn't add script to package.json: "spawn EINVAL", you can add it manually by running:
+
+        npm.cmd pkg set scripts.wdio="wdio run ./wdio.conf.js"
+
+🤖 Successfully setup project at C:\Users\LENOVO\Desktop\mobile-test 🎉
+
+Join our Discord Community Server and instantly find answers to your issues or queries. Or just join and say hi 👋!
+  🔗 https://discord.webdriver.io
+
+Visit the project on GitHub to report bugs 🐛 or raise feature requests 💡:
+  🔗 https://github.com/webdriverio/webdriverio
+
+To run your tests, execute:
+$ cd C:\Users\LENOVO\Desktop\mobile-test
+$ npm run wdio
+
+? Continue with Appium setup using appium-installer (https://github.com/AppiumTestDistribution/appium-installer)? No
+Ok! You can learn more about setting up mobile environments in the Appium docs at https://appium.io/docs/en/2.0/quickstart/
+
+C:\Users\LENOVO\Desktop\mobile-test>appiumm driver install uiautomator2
+'appiumm' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\LENOVO\Desktop\mobile-test>adb devices
+List of devices attached
+emulator-5554   device
+
+
+C:\Users\LENOVO\Desktop\mobile-test>npx wdio run wdio.conf.js
+
+Execution of 1 workers started at 2024-05-29T04:23:08.928Z
+
+2024-05-29T04:23:11.384Z INFO @wdio/cli:launcher: Run onPrepare hook
+2024-05-29T04:23:11.413Z INFO @wdio/appium-service: Will spawn Appium process: cmd /c node C:\Users\LENOVO\Desktop\mobile-test\node_modules\appium\index.js --base-path /
+2024-05-29T04:23:16.777Z ERROR @wdio/appium-service: [HTTP] Could not start REST http interface listener. The requested port may already be in use. Please make sure there is no other instance of this server running already.
+
+2024-05-29T04:23:16.780Z ERROR @wdio/cli:utils: A service failed in the 'onPrepare' hook
+Error: [HTTP] Could not start REST http interface listener. The requested port may already be in use. Please make sure there is no other instance of this server running already.
+
+    at Socket.<anonymous> (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/appium-service/build/launcher.js:174:28)
+    at Object.onceWrapper (node:events:634:26)
+    at Socket.emit (node:events:519:28)
+    at Socket.emit (node:domain:488:12)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at Readable.push (node:internal/streams/readable:390:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:191:23)
+
+Continue...
+2024-05-29T04:23:16.787Z INFO @wdio/cli:launcher: Run onWorkerStart hook
+2024-05-29T04:23:16.790Z INFO @wdio/local-runner: Start worker 0-0 with arg: run,wdio.conf.js
+2024-05-29T04:23:16.842Z ERROR @wdio/appium-service: Appium exited before timeout (exit code: 1)
+[HTTP] Could not start REST http interface listener. The requested port may already be in use. Please make sure there is no other instance of this server running already.
+
+[0-0] Error: "ts-node/esm/transpile-only 'resolve'" did not call the next hook in its chain and did not explicitly signal a short circuit. If this is intentional, include `shortCircuit: true` in the hook's return.
+[0-0]     at Hooks.resolve (node:internal/modules/esm/hooks:312:13)
+[0-0]     at MessagePort.handleMessage (node:internal/modules/esm/worker:196:18)
+[0-0] FAILED
+2024-05-29T04:23:18.156Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
+2024-05-29T04:23:18.157Z INFO @wdio/cli:launcher: Run onComplete hook
+
+Spec Files:      0 passed, 1 failed, 1 total (100% completed) in 00:00:09
+
+2024-05-29T04:23:18.160Z INFO @wdio/local-runner: Shutting down spawned worker
+2024-05-29T04:23:18.424Z INFO @wdio/local-runner: Waiting for 0 to shut down gracefully
+2024-05-29T04:23:18.425Z INFO @wdio/local-runner: shutting down
+
+C:\Users\LENOVO\Desktop\mobile-test>npx wdio run wdio.conf.js
+
+Execution of 1 workers started at 2024-05-29T04:23:33.367Z
+
+2024-05-29T04:23:34.750Z INFO @wdio/cli:launcher: Run onPrepare hook
+2024-05-29T04:23:34.787Z INFO @wdio/appium-service: Will spawn Appium process: cmd /c node C:\Users\LENOVO\Desktop\mobile-test\node_modules\appium\index.js --base-path /
+2024-05-29T04:23:38.696Z INFO @wdio/appium-service: Appium started with ID: 5012
+2024-05-29T04:23:38.701Z INFO @wdio/cli:launcher: Run onWorkerStart hook
+2024-05-29T04:23:38.704Z INFO @wdio/local-runner: Start worker 0-0 with arg: run,wdio.conf.js
+[0-0] Error: "ts-node/esm/transpile-only 'resolve'" did not call the next hook in its chain and did not explicitly signal a short circuit. If this is intentional, include `shortCircuit: true` in the hook's return.
+[0-0]     at Hooks.resolve (node:internal/modules/esm/hooks:312:13)
+[0-0]     at MessagePort.handleMessage (node:internal/modules/esm/worker:196:18)
+[0-0] FAILED
+2024-05-29T04:23:39.799Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
+2024-05-29T04:23:39.802Z INFO @wdio/cli:launcher: Run onComplete hook
+2024-05-29T04:23:39.803Z INFO @wdio/appium-service: Appium (pid: 5012) killed
+
+Spec Files:      0 passed, 1 failed, 1 total (100% completed) in 00:00:06
+
+2024-05-29T04:23:39.805Z INFO @wdio/local-runner: Shutting down spawned worker
+2024-05-29T04:23:39.809Z ERROR @wdio/appium-service: Appium exited before timeout (exit code: null)
+2024-05-29T04:23:40.061Z INFO @wdio/local-runner: Waiting for 0 to shut down gracefully
+2024-05-29T04:23:40.066Z INFO @wdio/local-runner: shutting down
+
+C:\Users\LENOVO\Desktop\mobile-test>npx wdio run wdio.conf.js
+
+Execution of 1 workers started at 2024-05-29T04:24:09.324Z
+
+2024-05-29T04:24:10.696Z INFO @wdio/cli:launcher: Run onPrepare hook
+2024-05-29T04:24:10.721Z INFO @wdio/appium-service: Will spawn Appium process: cmd /c node C:\Users\LENOVO\Desktop\mobile-test\node_modules\appium\index.js --base-path /
+2024-05-29T04:24:14.966Z ERROR @wdio/appium-service: [HTTP] Could not start REST http interface listener. The requested port may already be in use. Please make sure there is no other instance of this server running already.
+
+2024-05-29T04:24:14.969Z ERROR @wdio/cli:utils: A service failed in the 'onPrepare' hook
+Error: [HTTP] Could not start REST http interface listener. The requested port may already be in use. Please make sure there is no other instance of this server running already.
+
+    at Socket.<anonymous> (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/appium-service/build/launcher.js:174:28)
+    at Object.onceWrapper (node:events:634:26)
+    at Socket.emit (node:events:519:28)
+    at Socket.emit (node:domain:488:12)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at Readable.push (node:internal/streams/readable:390:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:191:23)
+
+Continue...
+2024-05-29T04:24:14.974Z INFO @wdio/cli:launcher: Run onWorkerStart hook
+2024-05-29T04:24:14.976Z INFO @wdio/local-runner: Start worker 0-0 with arg: run,wdio.conf.js
+2024-05-29T04:24:15.017Z ERROR @wdio/appium-service: Appium exited before timeout (exit code: 1)
+[HTTP] Could not start REST http interface listener. The requested port may already be in use. Please make sure there is no other instance of this server running already.
+
+[0-0] Error: "ts-node/esm/transpile-only 'resolve'" did not call the next hook in its chain and did not explicitly signal a short circuit. If this is intentional, include `shortCircuit: true` in the hook's return.
+[0-0]     at Hooks.resolve (node:internal/modules/esm/hooks:312:13)
+[0-0]     at MessagePort.handleMessage (node:internal/modules/esm/worker:196:18)
+[0-0] FAILED
+2024-05-29T04:24:16.152Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
+2024-05-29T04:24:16.154Z INFO @wdio/cli:launcher: Run onComplete hook
+
+Spec Files:      0 passed, 1 failed, 1 total (100% completed) in 00:00:06
+
+2024-05-29T04:24:16.157Z INFO @wdio/local-runner: Shutting down spawned worker
+2024-05-29T04:24:16.420Z INFO @wdio/local-runner: Waiting for 0 to shut down gracefully
+2024-05-29T04:24:16.421Z INFO @wdio/local-runner: shutting down
+
+C:\Users\LENOVO\Desktop\mobile-test>taskkill /F /IM node.exe
+SUCCESS: The process "node.exe" with PID 13100 has been terminated.
+
+C:\Users\LENOVO\Desktop\mobile-test>npx wdio run wdio.conf.js
+
+Execution of 1 workers started at 2024-05-29T04:25:54.946Z
+
+2024-05-29T04:25:56.694Z INFO @wdio/cli:launcher: Run onPrepare hook
+2024-05-29T04:25:56.729Z INFO @wdio/appium-service: Will spawn Appium process: cmd /c node C:\Users\LENOVO\Desktop\mobile-test\node_modules\appium\index.js --base-path /
+2024-05-29T04:26:01.176Z INFO @wdio/appium-service: Appium started with ID: 4480
+2024-05-29T04:26:01.181Z INFO @wdio/cli:launcher: Run onWorkerStart hook
+2024-05-29T04:26:01.183Z INFO @wdio/local-runner: Start worker 0-0 with arg: run,wdio.conf.js
+[0-0] Error: "ts-node/esm/transpile-only 'resolve'" did not call the next hook in its chain and did not explicitly signal a short circuit. If this is intentional, include `shortCircuit: true` in the hook's return.
+[0-0]     at Hooks.resolve (node:internal/modules/esm/hooks:312:13)
+[0-0]     at MessagePort.handleMessage (node:internal/modules/esm/worker:196:18)
+[0-0] FAILED
+2024-05-29T04:26:02.459Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
+2024-05-29T04:26:02.460Z INFO @wdio/cli:launcher: Run onComplete hook
+2024-05-29T04:26:02.461Z INFO @wdio/appium-service: Appium (pid: 4480) killed
+
+Spec Files:      0 passed, 1 failed, 1 total (100% completed) in 00:00:07
+
+2024-05-29T04:26:02.465Z INFO @wdio/local-runner: Shutting down spawned worker
+2024-05-29T04:26:02.467Z ERROR @wdio/appium-service: Appium exited before timeout (exit code: null)
+2024-05-29T04:26:02.726Z INFO @wdio/local-runner: Waiting for 0 to shut down gracefully
+2024-05-29T04:26:02.727Z INFO @wdio/local-runner: shutting down
+
+C:\Users\LENOVO\Desktop\mobile-test>npm install ts-node --save-dev
+
+added 11 packages, removed 290 packages, changed 1 package, and audited 911 packages in 22s
+
+102 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+C:\Users\LENOVO\Desktop\mobile-test>npx wdio run wdio.conf.js
+
+Execution of 1 workers started at 2024-05-29T04:28:08.929Z
+
+2024-05-29T04:28:10.608Z INFO @wdio/cli:launcher: Run onPrepare hook
+2024-05-29T04:28:10.637Z INFO @wdio/appium-service: Will spawn Appium process: cmd /c node C:\Users\LENOVO\node_modules\appium\index.js --base-path /
+2024-05-29T04:28:15.993Z ERROR @wdio/appium-service: [HTTP] Could not start REST http interface listener. The requested port may already be in use. Please make sure there is no other instance of this server running already.
+
+2024-05-29T04:28:15.995Z ERROR @wdio/cli:utils: A service failed in the 'onPrepare' hook
+Error: [HTTP] Could not start REST http interface listener. The requested port may already be in use. Please make sure there is no other instance of this server running already.
+
+    at Socket.<anonymous> (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/appium-service/build/launcher.js:174:28)
+    at Object.onceWrapper (node:events:634:26)
+    at Socket.emit (node:events:519:28)
+    at Socket.emit (node:domain:488:12)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at Readable.push (node:internal/streams/readable:390:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:191:23)
+
+Continue...
+2024-05-29T04:28:16.001Z INFO @wdio/cli:launcher: Run onWorkerStart hook
+2024-05-29T04:28:16.004Z INFO @wdio/local-runner: Start worker 0-0 with arg: run,wdio.conf.js
+2024-05-29T04:28:16.039Z ERROR @wdio/appium-service: Appium exited before timeout (exit code: 1)
+[HTTP] Could not start REST http interface listener. The requested port may already be in use. Please make sure there is no other instance of this server running already.
+
+[0-0] 2024-05-29T04:28:31.221Z INFO @wdio/local-runner: Run worker command: run
+[0-0] RUNNING in Android - file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+[0-0] 2024-05-29T04:28:32.655Z ERROR webdriver: RequestError: connect ECONNREFUSED 127.0.0.1:52964
+[0-0]     at ClientRequest.<anonymous> (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/got/dist/source/core/index.js:790:107)
+[0-0]     at Object.onceWrapper (node:events:634:26)
+[0-0]     at ClientRequest.emit (node:events:531:35)
+[0-0]     at ClientRequest.emit (node:domain:488:12)
+[0-0]     at Socket.socketErrorListener (node:_http_client:500:9)
+[0-0]     at Socket.emit (node:events:519:28)
+[0-0]     at Socket.emit (node:domain:488:12)
+[0-0]     at emitErrorNT (node:internal/streams/destroy:169:8)
+[0-0]     at emitErrorCloseNT (node:internal/streams/destroy:128:3)
+[0-0]     at processTicksAndRejections (node:internal/process/task_queues:82:21)
+[0-0]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1606:16)
+[0-0] 2024-05-29T04:28:32.656Z ERROR @wdio/runner: Error: Failed to create session.
+[0-0] Unable to connect to "http://127.0.0.1:52964/", make sure browser driver is running on that address.
+[0-0] It seems like the service failed to start or is rejecting any connections.
+[0-0]     at startWebDriverSession (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/webdriver/build/utils.js:69:15)
+[0-0]     at processTicksAndRejections (node:internal/process/task_queues:95:5)
+[0-0]     at async Function.newSession (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/webdriver/build/index.js:20:45)
+[0-0]     at async remote (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/webdriverio/build/index.js:46:22)
+[0-0]     at async Runner._startSession (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/runner/build/index.js:241:29)
+[0-0]     at async Runner._initSession (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/runner/build/index.js:207:25)
+[0-0]     at async Runner.run (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/runner/build/index.js:88:19)
+[0-0] FAILED in Android - file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+2024-05-29T04:28:53.024Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
+2024-05-29T04:28:53.026Z INFO @wdio/cli:launcher: Run onComplete hook
+
+Spec Files:      0 passed, 1 failed, 1 total (100% completed) in 00:00:44
+
+2024-05-29T04:28:53.034Z INFO @wdio/local-runner: Shutting down spawned worker
+[0-0] 2024-05-29T04:28:31.820Z INFO webdriver: Initiate new session using the WebDriver protocol
+[0-0] 2024-05-29T04:28:31.821Z INFO @wdio/utils: Connecting to existing driver at http://127.0.0.1:52964/
+[0-0] 2024-05-29T04:28:32.282Z INFO webdriver: [POST] http://127.0.0.1:52964/session
+[0-0] 2024-05-29T04:28:32.283Z INFO webdriver: DATA {
+[0-0]   capabilities: {
+[0-0]     alwaysMatch: {
+[0-0]       platformName: 'Android',
+[0-0]       'appium:platformVersion': '11',
+[0-0]       'appium:deviceName': 'emulator-5554',
+[0-0]       'appium:app': './android.wdio.native.app.v1.0.8.apk',
+[0-0]       'appium:automationName': 'UIAutomator2'
+[0-0]     },
+[0-0]     firstMatch: [ {} ]
+[0-0]   },
+[0-0]   desiredCapabilities: {
+[0-0]     platformName: 'Android',
+[0-0]     'appium:platformVersion': '11',
+[0-0]     'appium:deviceName': 'emulator-5554',
+[0-0]     'appium:app': './android.wdio.native.app.v1.0.8.apk',
+[0-0]     'appium:automationName': 'UIAutomator2'
+[0-0]   }
+[0-0] }
+2024-05-29T04:28:53.296Z INFO @wdio/local-runner: Waiting for 0 to shut down gracefully
+2024-05-29T04:28:53.297Z INFO @wdio/local-runner: shutting down
+
+C:\Users\LENOVO\Desktop\mobile-test>taskkill /F /IM node.exe
+SUCCESS: The process "node.exe" with PID 1552 has been terminated.
+
+C:\Users\LENOVO\Desktop\mobile-test>npx wdio run wdio.conf.js
+
+Execution of 1 workers started at 2024-05-29T04:29:12.633Z
+
+2024-05-29T04:29:13.937Z INFO @wdio/cli:launcher: Run onPrepare hook
+2024-05-29T04:29:13.973Z INFO @wdio/appium-service: Will spawn Appium process: cmd /c node C:\Users\LENOVO\node_modules\appium\index.js --base-path /
+2024-05-29T04:29:18.684Z INFO @wdio/appium-service: Appium started with ID: 4460
+2024-05-29T04:29:18.690Z INFO @wdio/cli:launcher: Run onWorkerStart hook
+2024-05-29T04:29:18.692Z INFO @wdio/local-runner: Start worker 0-0 with arg: run,wdio.conf.js
+[0-0] 2024-05-29T04:29:22.665Z INFO @wdio/local-runner: Run worker command: run
+[0-0] RUNNING in Android - file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+[0-0] 2024-05-29T04:29:23.243Z INFO webdriver: Initiate new session using the WebDriver protocol
+[0-0] 2024-05-29T04:29:23.244Z INFO @wdio/utils: Connecting to existing driver at http://127.0.0.1:4723/
+[0-0] 2024-05-29T04:29:23.585Z INFO webdriver: [POST] http://127.0.0.1:4723/session
+[0-0] 2024-05-29T04:29:23.586Z INFO webdriver: DATA {
+[0-0]   capabilities: {
+[0-0]     alwaysMatch: {
+[0-0]       platformName: 'Android',
+[0-0]       'appium:platformVersion': '11',
+[0-0]       'appium:deviceName': 'emulator-5554',
+[0-0]       'appium:app': './android.wdio.native.app.v1.0.8.apk',
+[0-0]       'appium:automationName': 'UIAutomator2'
+[0-0]     },
+[0-0]     firstMatch: [ {} ]
+[0-0]   },
+[0-0]   desiredCapabilities: {
+[0-0]     platformName: 'Android',
+[0-0]     'appium:platformVersion': '11',
+[0-0]     'appium:deviceName': 'emulator-5554',
+[0-0]     'appium:app': './android.wdio.native.app.v1.0.8.apk',
+[0-0]     'appium:automationName': 'UIAutomator2'
+[0-0]   }
+[0-0] }
+[0-0] 2024-05-29T04:29:35.626Z INFO webdriver: COMMAND findElement("xpath", "//android.widget.EditText[@content-desc="input-email"]")
+[0-0] 2024-05-29T04:29:35.629Z INFO webdriver: COMMAND findElement("xpath", "//android.widget.EditText[@content-desc="input-password"]")
+[0-0] 2024-05-29T04:29:35.676Z INFO webdriver: COMMAND findElement("xpath", "//android.view.ViewGroup[@content-desc="button-LOGIN"]/android.view.ViewGroup")
+[0-0] 2024-05-29T04:29:35.685Z INFO webdriver: COMMAND findElement("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:29:35.688Z INFO webdriver: COMMAND findElement("xpath", "//android.view.View[@content-desc="Login"]")
+[0-0] 2024-05-29T04:29:35.689Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/element
+[0-0] 2024-05-29T04:29:35.690Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.EditText[@content-desc="input-email"]'
+[0-0] }
+[0-0] 2024-05-29T04:29:35.691Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/element
+[0-0] 2024-05-29T04:29:35.691Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.EditText[@content-desc="input-password"]'
+[0-0] }
+[0-0] 2024-05-29T04:29:35.754Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/element
+[0-0] 2024-05-29T04:29:35.754Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.view.ViewGroup[@content-desc="button-LOGIN"]/android.view.ViewGroup'
+[0-0] }
+[0-0] 2024-05-29T04:29:35.819Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/element
+[0-0] 2024-05-29T04:29:35.821Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:29:35.830Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/element
+[0-0] 2024-05-29T04:29:35.832Z INFO webdriver: DATA { using: 'xpath', value: '//android.view.View[@content-desc="Login"]' }
+[0-0] 2024-05-29T04:29:47.853Z INFO webdriver: RESULT {
+[0-0]   error: 'no such element',
+[0-0]   message: 'An element could not be located on the page using the given search parameters.',
+[0-0]   stacktrace: 'NoSuchElementError: An element could not be located on the page using the given search parameters.\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElOrEls (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\appium-android-driver\\lib\\commands\\find.ts:86:11)\n' +
+[0-0]     '    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\@appium\\base-driver\\lib\\basedriver\\commands\\find.ts:60:12)\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElement (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\@appium\\base-driver\\lib\\basedriver\\commands\\find.ts:75:12)'
+[0-0] }
+[0-0] 2024-05-29T04:29:47.950Z INFO webdriver: RESULT {
+[0-0]   error: 'no such element',
+[0-0]   message: 'An element could not be located on the page using the given search parameters.',
+[0-0]   stacktrace: 'NoSuchElementError: An element could not be located on the page using the given search parameters.\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElOrEls (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\appium-android-driver\\lib\\commands\\find.ts:86:11)\n' +
+[0-0]     '    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\@appium\\base-driver\\lib\\basedriver\\commands\\find.ts:60:12)\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElement (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\@appium\\base-driver\\lib\\basedriver\\commands\\find.ts:75:12)'
+[0-0] }
+[0-0] 2024-05-29T04:29:48.058Z INFO webdriver: RESULT {
+[0-0]   error: 'no such element',
+[0-0]   message: 'An element could not be located on the page using the given search parameters.',
+[0-0]   stacktrace: 'NoSuchElementError: An element could not be located on the page using the given search parameters.\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElOrEls (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\appium-android-driver\\lib\\commands\\find.ts:86:11)\n' +
+[0-0]     '    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\@appium\\base-driver\\lib\\basedriver\\commands\\find.ts:60:12)\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElement (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\@appium\\base-driver\\lib\\basedriver\\commands\\find.ts:75:12)'
+[0-0] }
+[0-0] 2024-05-29T04:29:48.158Z INFO webdriver: RESULT {
+[0-0]   error: 'no such element',
+[0-0]   message: 'An element could not be located on the page using the given search parameters.',
+[0-0]   stacktrace: 'NoSuchElementError: An element could not be located on the page using the given search parameters.\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElOrEls (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\appium-android-driver\\lib\\commands\\find.ts:86:11)\n' +
+[0-0]     '    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\@appium\\base-driver\\lib\\basedriver\\commands\\find.ts:60:12)\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElement (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\@appium\\base-driver\\lib\\basedriver\\commands\\find.ts:75:12)'
+[0-0] }
+[0-0] 2024-05-29T04:29:48.265Z INFO webdriver: RESULT {
+[0-0]   'element-6066-11e4-a52e-4f735466cecf': '00000000-0000-0016-ffff-ffff0000002c',
+[0-0]   ELEMENT: '00000000-0000-0016-ffff-ffff0000002c'
+[0-0] }
+[0-0] 2024-05-29T04:29:48.281Z INFO webdriver: COMMAND elementClick("00000000-0000-0016-ffff-ffff0000002c")
+[0-0] 2024-05-29T04:29:48.285Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/element/00000000-0000-0016-ffff-ffff0000002c/click
+[0-0] 2024-05-29T04:29:48.382Z INFO webdriver: RESULT null
+[0-0] 2024-05-29T04:29:48.388Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.EditText[@content-desc="input-email"]")
+[0-0] 2024-05-29T04:29:48.395Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/elements
+[0-0] 2024-05-29T04:29:48.396Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.EditText[@content-desc="input-email"]'
+[0-0] }
+[0-0] 2024-05-29T04:29:48.511Z INFO webdriver: RESULT []
+[0-0] 2024-05-29T04:29:48.905Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.EditText[@content-desc="input-email"]")
+[0-0] 2024-05-29T04:29:48.907Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/elements
+[0-0] 2024-05-29T04:29:48.907Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.EditText[@content-desc="input-email"]'
+[0-0] }
+[0-0] 2024-05-29T04:29:49.271Z INFO webdriver: RESULT [
+[0-0]   {
+[0-0]     'element-6066-11e4-a52e-4f735466cecf': '00000000-0000-0016-ffff-ffff00000059',
+[0-0]     ELEMENT: '00000000-0000-0016-ffff-ffff00000059'
+[0-0]   }
+[0-0] ]
+[0-0] 2024-05-29T04:29:49.283Z INFO webdriver: COMMAND findElement("xpath", "//android.widget.EditText[@content-desc="input-email"]")
+[0-0] 2024-05-29T04:29:49.285Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/element
+[0-0] 2024-05-29T04:29:49.286Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.EditText[@content-desc="input-email"]'
+[0-0] }
+[0-0] 2024-05-29T04:29:49.374Z INFO webdriver: RESULT {
+[0-0]   'element-6066-11e4-a52e-4f735466cecf': '00000000-0000-0016-ffff-ffff00000059',
+[0-0]   ELEMENT: '00000000-0000-0016-ffff-ffff00000059'
+[0-0] }
+[0-0] 2024-05-29T04:29:49.383Z INFO webdriver: COMMAND elementClear("00000000-0000-0016-ffff-ffff00000059")
+[0-0] 2024-05-29T04:29:49.386Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/element/00000000-0000-0016-ffff-ffff00000059/clear
+[0-0] 2024-05-29T04:29:49.429Z INFO webdriver: RESULT null
+[0-0] 2024-05-29T04:29:49.434Z INFO webdriver: COMMAND elementSendKeys("00000000-0000-0016-ffff-ffff00000059", "<Screenshot[base64]>")
+[0-0] 2024-05-29T04:29:49.436Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/element/00000000-0000-0016-ffff-ffff00000059/value
+[0-0] 2024-05-29T04:29:49.437Z INFO webdriver: DATA { text: 'Test' }
+[0-0] 2024-05-29T04:29:50.477Z INFO webdriver: RESULT null
+[0-0] 2024-05-29T04:29:50.481Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.EditText[@content-desc="input-password"]")
+[0-0] 2024-05-29T04:29:50.486Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/elements
+[0-0] 2024-05-29T04:29:50.486Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.EditText[@content-desc="input-password"]'
+[0-0] }
+[0-0] 2024-05-29T04:29:51.026Z INFO webdriver: RESULT [
+[0-0]   {
+[0-0]     'element-6066-11e4-a52e-4f735466cecf': '00000000-0000-0016-ffff-ffff0000005d',
+[0-0]     ELEMENT: '00000000-0000-0016-ffff-ffff0000005d'
+[0-0]   }
+[0-0] ]
+[0-0] 2024-05-29T04:29:51.039Z INFO webdriver: COMMAND findElement("xpath", "//android.widget.EditText[@content-desc="input-password"]")
+[0-0] 2024-05-29T04:29:51.041Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/element
+[0-0] 2024-05-29T04:29:51.042Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.EditText[@content-desc="input-password"]'
+[0-0] }
+[0-0] 2024-05-29T04:29:51.136Z INFO webdriver: RESULT {
+[0-0]   'element-6066-11e4-a52e-4f735466cecf': '00000000-0000-0016-ffff-ffff0000005d',
+[0-0]   ELEMENT: '00000000-0000-0016-ffff-ffff0000005d'
+[0-0] }
+[0-0] 2024-05-29T04:29:51.148Z INFO webdriver: COMMAND elementClear("00000000-0000-0016-ffff-ffff0000005d")
+[0-0] 2024-05-29T04:29:51.150Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/element/00000000-0000-0016-ffff-ffff0000005d/clear
+[0-0] 2024-05-29T04:29:51.185Z INFO webdriver: RESULT null
+[0-0] 2024-05-29T04:29:51.188Z INFO webdriver: COMMAND elementSendKeys("00000000-0000-0016-ffff-ffff0000005d", "<Screenshot[base64]>")
+[0-0] 2024-05-29T04:29:51.201Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/element/00000000-0000-0016-ffff-ffff0000005d/value
+[0-0] 2024-05-29T04:29:51.201Z INFO webdriver: DATA { text: 'Pass' }
+[0-0] 2024-05-29T04:29:52.201Z INFO webdriver: RESULT null
+[0-0] 2024-05-29T04:29:52.204Z INFO webdriver: COMMAND findElements("xpath", "//android.view.ViewGroup[@content-desc="button-LOGIN"]/android.view.ViewGroup")
+[0-0] 2024-05-29T04:29:52.211Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/elements
+[0-0] 2024-05-29T04:29:52.212Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.view.ViewGroup[@content-desc="button-LOGIN"]/android.view.ViewGroup'
+[0-0] }
+[0-0] 2024-05-29T04:29:52.747Z INFO webdriver: RESULT [
+[0-0]   {
+[0-0]     'element-6066-11e4-a52e-4f735466cecf': '00000000-0000-0016-ffff-ffff00000061',
+[0-0]     ELEMENT: '00000000-0000-0016-ffff-ffff00000061'
+[0-0]   }
+[0-0] ]
+[0-0] 2024-05-29T04:29:52.756Z INFO webdriver: COMMAND findElement("xpath", "//android.view.ViewGroup[@content-desc="button-LOGIN"]/android.view.ViewGroup")
+[0-0] 2024-05-29T04:29:52.759Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/element
+[0-0] 2024-05-29T04:29:52.760Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.view.ViewGroup[@content-desc="button-LOGIN"]/android.view.ViewGroup'
+[0-0] }
+[0-0] 2024-05-29T04:29:52.861Z INFO webdriver: RESULT {
+[0-0]   'element-6066-11e4-a52e-4f735466cecf': '00000000-0000-0016-ffff-ffff00000061',
+[0-0]   ELEMENT: '00000000-0000-0016-ffff-ffff00000061'
+[0-0] }
+[0-0] 2024-05-29T04:29:52.869Z INFO webdriver: COMMAND elementClick("00000000-0000-0016-ffff-ffff00000061")
+[0-0] 2024-05-29T04:29:52.871Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/element/00000000-0000-0016-ffff-ffff00000061/click
+[0-0] 2024-05-29T04:29:52.970Z INFO webdriver: RESULT null
+[0-0] 2024-05-29T04:29:52.978Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:29:53.005Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/elements
+[0-0] 2024-05-29T04:29:53.006Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:29:53.156Z INFO webdriver: RESULT []
+[0-0] 2024-05-29T04:29:53.670Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:29:53.671Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/elements
+[0-0] 2024-05-29T04:29:53.671Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:29:53.988Z INFO webdriver: RESULT []
+[0-0] 2024-05-29T04:29:54.495Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:29:54.496Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/elements
+[0-0] 2024-05-29T04:29:54.496Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:29:54.561Z INFO webdriver: RESULT []
+[0-0] 2024-05-29T04:29:55.072Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:29:55.074Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/elements
+[0-0] 2024-05-29T04:29:55.075Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:29:55.148Z INFO webdriver: RESULT []
+[0-0] 2024-05-29T04:29:55.660Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:29:55.664Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/elements
+[0-0] 2024-05-29T04:29:55.665Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:29:55.742Z INFO webdriver: RESULT []
+[0-0] 2024-05-29T04:29:56.247Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:29:56.248Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/elements
+[0-0] 2024-05-29T04:29:56.248Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:29:56.322Z INFO webdriver: RESULT []
+[0-0] 2024-05-29T04:29:56.841Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:29:56.842Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/elements
+[0-0] 2024-05-29T04:29:56.843Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:29:56.919Z INFO webdriver: RESULT []
+[0-0] 2024-05-29T04:29:57.432Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:29:57.434Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/elements
+[0-0] 2024-05-29T04:29:57.435Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:29:57.509Z INFO webdriver: RESULT []
+[0-0] 2024-05-29T04:29:58.023Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:29:58.025Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/elements
+[0-0] 2024-05-29T04:29:58.025Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:29:58.081Z INFO webdriver: RESULT []
+[0-0] 2024-05-29T04:29:58.597Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:29:58.598Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/elements
+[0-0] 2024-05-29T04:29:58.599Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:29:58.657Z INFO webdriver: RESULT []
+[0-0] 2024-05-29T04:29:59.173Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:29:59.174Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/elements
+[0-0] 2024-05-29T04:29:59.175Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:29:59.243Z INFO webdriver: RESULT []
+[0-0] 2024-05-29T04:29:59.761Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:29:59.764Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/elements
+[0-0] 2024-05-29T04:29:59.764Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:29:59.829Z INFO webdriver: RESULT []
+[0-0] 2024-05-29T04:30:00.338Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:30:00.340Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/elements
+[0-0] 2024-05-29T04:30:00.340Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:30:00.865Z INFO webdriver: RESULT []
+[0-0] 2024-05-29T04:30:01.375Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:30:01.377Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/elements
+[0-0] 2024-05-29T04:30:01.378Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:30:01.439Z INFO webdriver: RESULT []
+[0-0] 2024-05-29T04:30:01.973Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:30:01.976Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/elements
+[0-0] 2024-05-29T04:30:01.977Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:30:02.040Z INFO webdriver: RESULT []
+[0-0] 2024-05-29T04:30:02.557Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:30:02.558Z INFO webdriver: [POST] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/elements
+[0-0] 2024-05-29T04:30:02.558Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:30:02.625Z INFO webdriver: RESULT []
+[0-0] 2024-05-29T04:30:03.137Z INFO webdriver: COMMAND takeScreenshot()
+[0-0] 2024-05-29T04:30:03.138Z INFO webdriver: [GET] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e/screenshot
+[0-0] 2024-05-29T04:30:03.813Z INFO webdriver: RESULT iVBORw0KGgoAAAANSUhEUgAABDgAAAjoCAYAAAA5jhrUAAAAAXNSR0IArs4c6...
+[0-0] Error in "My Login application.should login with valid credentials"
+Error: Expect $(`//android.widget.TextView[@resource-id="android:id/message"]`) to exist
+
+Expected: "exist"
+Received: "not exist"
+    at Context.<anonymous> (file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js:18:29)
+[0-0] 2024-05-29T04:30:03.831Z INFO webdriver: COMMAND deleteSession()
+[0-0] 2024-05-29T04:30:03.835Z INFO webdriver: [DELETE] http://127.0.0.1:4723/session/275e8edd-609f-4872-b155-0a9fe038914e
+[0-0] 2024-05-29T04:30:04.963Z INFO webdriver: RESULT null
+[0-0] FAILED in Android - file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+2024-05-29T04:30:05.137Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
+2024-05-29T04:30:05.141Z INFO @wdio/cli:launcher: Run onComplete hook
+2024-05-29T04:30:05.142Z INFO @wdio/appium-service: Appium (pid: 4460) killed
+
+ "spec" Reporter:
+------------------------------------------------------------------
+[./android.wdio.native.app.v1.0.8.apk Android #0-0] Running: ./android.wdio.native.app.v1.0.8.apk on Android
+[./android.wdio.native.app.v1.0.8.apk Android #0-0] Session ID: 275e8edd-609f-4872-b155-0a9fe038914e
+[./android.wdio.native.app.v1.0.8.apk Android #0-0]
+[./android.wdio.native.app.v1.0.8.apk Android #0-0] » \test\specs\test.e2e.js
+[./android.wdio.native.app.v1.0.8.apk Android #0-0] My Login application
+[./android.wdio.native.app.v1.0.8.apk Android #0-0]    ✖ should login with valid credentials
+[./android.wdio.native.app.v1.0.8.apk Android #0-0]
+[./android.wdio.native.app.v1.0.8.apk Android #0-0] 1 failing (29.3s)
+[./android.wdio.native.app.v1.0.8.apk Android #0-0]
+[./android.wdio.native.app.v1.0.8.apk Android #0-0] 1) My Login application should login with valid credentials
+[./android.wdio.native.app.v1.0.8.apk Android #0-0] Expect $(`//android.widget.TextView[@resource-id="android:id/message"]`) to exist
+
+Expected: "exist"
+Received: "not exist"
+[./android.wdio.native.app.v1.0.8.apk Android #0-0] Error: Expect $(`//android.widget.TextView[@resource-id="android:id/message"]`) to exist
+[./android.wdio.native.app.v1.0.8.apk Android #0-0]
+[./android.wdio.native.app.v1.0.8.apk Android #0-0] Expected: "exist"
+[./android.wdio.native.app.v1.0.8.apk Android #0-0] Received: "not exist"
+[./android.wdio.native.app.v1.0.8.apk Android #0-0]     at Context.<anonymous> (file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js:18:29)
+
+
+Spec Files:      0 passed, 1 failed, 1 total (100% completed) in 00:00:52
+
+2024-05-29T04:30:05.149Z INFO @wdio/local-runner: Shutting down spawned worker
+2024-05-29T04:30:05.158Z ERROR @wdio/appium-service: Appium exited before timeout (exit code: null)
+2024-05-29T04:30:05.412Z INFO @wdio/local-runner: Waiting for 0 to shut down gracefully
+2024-05-29T04:30:05.413Z INFO @wdio/local-runner: shutting down
+
+C:\Users\LENOVO\Desktop\mobile-test>npx wdio run wdio.conf.js
+
+Execution of 1 workers started at 2024-05-29T04:32:04.636Z
+
+2024-05-29T04:32:06.483Z INFO @wdio/cli:launcher: Run onPrepare hook
+2024-05-29T04:32:06.507Z INFO @wdio/appium-service: Will spawn Appium process: cmd /c node C:\Users\LENOVO\node_modules\appium\index.js --base-path /
+2024-05-29T04:32:12.167Z ERROR @wdio/appium-service: [HTTP] Could not start REST http interface listener. The requested port may already be in use. Please make sure there is no other instance of this server running already.
+
+2024-05-29T04:32:12.169Z ERROR @wdio/cli:utils: A service failed in the 'onPrepare' hook
+Error: [HTTP] Could not start REST http interface listener. The requested port may already be in use. Please make sure there is no other instance of this server running already.
+
+    at Socket.<anonymous> (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/appium-service/build/launcher.js:174:28)
+    at Object.onceWrapper (node:events:634:26)
+    at Socket.emit (node:events:519:28)
+    at Socket.emit (node:domain:488:12)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at Readable.push (node:internal/streams/readable:390:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:191:23)
+
+Continue...
+2024-05-29T04:32:12.175Z INFO @wdio/cli:launcher: Run onWorkerStart hook
+2024-05-29T04:32:12.178Z INFO @wdio/local-runner: Start worker 0-0 with arg: run,wdio.conf.js
+2024-05-29T04:32:12.245Z ERROR @wdio/appium-service: Appium exited before timeout (exit code: 1)
+[HTTP] Could not start REST http interface listener. The requested port may already be in use. Please make sure there is no other instance of this server running already.
+
+[0-0] 2024-05-29T04:32:25.685Z INFO @wdio/local-runner: Run worker command: run
+[0-0] 2024-05-29T04:32:26.241Z WARN @wdio/mocha-framework: Unable to load spec files quite likely because they rely on `browser` object that is not fully initialized.
+[0-0] `browser` object has only `capabilities` and some flags like `isMobile`.
+[0-0] Helper files that use other `browser` commands have to be moved to `before` hook.
+[0-0] Spec file(s): file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+[0-0] Error: ReferenceError: $ is not defined
+[0-0]     at file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js?invalidateCache=0.8293947412587372:5:24
+[0-0]     at ModuleJob.run (node:internal/modules/esm/module_job:222:25)
+[0-0]     at async ModuleLoader.import (node:internal/modules/esm/loader:316:24)
+[0-0]     at async formattedImport (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:9:14)
+[0-0]     at async Object.exports.requireOrImport (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:42:28)
+[0-0]     at async Object.exports.loadFilesAsync (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:100:20)
+[0-0]     at async MochaAdapter._loadFiles (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:72:13)
+[0-0]     at async MochaAdapter.init (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:66:9)
+[0-0]     at async Object.adapterFactory.init (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:222:22)
+[0-0]     at async Runner.run (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/runner/build/index.js:83:27)
+[0-0] 2024-05-29T04:32:26.937Z ERROR webdriver: RequestError: connect ECONNREFUSED 127.0.0.1:53229
+[0-0]     at ClientRequest.<anonymous> (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/got/dist/source/core/index.js:790:107)
+[0-0]     at Object.onceWrapper (node:events:634:26)
+[0-0]     at ClientRequest.emit (node:events:531:35)
+[0-0]     at ClientRequest.emit (node:domain:488:12)
+[0-0]     at Socket.socketErrorListener (node:_http_client:500:9)
+[0-0]     at Socket.emit (node:events:519:28)
+[0-0]     at Socket.emit (node:domain:488:12)
+[0-0]     at emitErrorNT (node:internal/streams/destroy:169:8)
+[0-0]     at emitErrorCloseNT (node:internal/streams/destroy:128:3)
+[0-0]     at processTicksAndRejections (node:internal/process/task_queues:82:21)
+[0-0]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1606:16)
+[0-0] 2024-05-29T04:32:26.938Z ERROR @wdio/runner: Error: Failed to create session.
+[0-0] Unable to connect to "http://127.0.0.1:53229/", make sure browser driver is running on that address.
+[0-0] It seems like the service failed to start or is rejecting any connections.
+[0-0]     at startWebDriverSession (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/webdriver/build/utils.js:69:15)
+[0-0]     at processTicksAndRejections (node:internal/process/task_queues:95:5)
+[0-0]     at async Function.newSession (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/webdriver/build/index.js:20:45)
+[0-0]     at async remote (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/webdriverio/build/index.js:46:22)
+[0-0]     at async Runner._startSession (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/runner/build/index.js:241:29)
+[0-0]     at async Runner._initSession (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/runner/build/index.js:207:25)
+[0-0]     at async Runner.run (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/runner/build/index.js:88:19)
+[0-0] RUNNING in Android - file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+[0-0] FAILED in Android - file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+2024-05-29T04:34:04.541Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
+2024-05-29T04:34:04.542Z INFO @wdio/cli:launcher: Run onComplete hook
+
+Spec Files:      0 passed, 1 failed, 1 total (100% completed) in 00:01:59
+
+2024-05-29T04:34:04.544Z INFO @wdio/local-runner: Shutting down spawned worker
+[0-0] 2024-05-29T04:32:26.244Z INFO webdriver: Initiate new session using the WebDriver protocol
+[0-0] 2024-05-29T04:32:26.244Z INFO @wdio/utils: Connecting to existing driver at http://127.0.0.1:53229/
+[0-0] 2024-05-29T04:32:26.578Z INFO webdriver: [POST] http://127.0.0.1:53229/session
+[0-0] 2024-05-29T04:32:26.578Z INFO webdriver: DATA {
+[0-0]   capabilities: {
+[0-0]     alwaysMatch: {
+[0-0]       platformName: 'Android',
+[0-0]       'appium:platformVersion': '11',
+[0-0]       'appium:deviceName': 'emulator-5554',
+[0-0]       'appium:app': './android.wdio.native.app.v1.0.8.apk',
+[0-0]       'appium:automationName': 'UIAutomator2'
+[0-0]     },
+[0-0]     firstMatch: [ {} ]
+[0-0]   },
+[0-0]   desiredCapabilities: {
+[0-0]     platformName: 'Android',
+[0-0]     'appium:platformVersion': '11',
+[0-0]     'appium:deviceName': 'emulator-5554',
+[0-0]     'appium:app': './android.wdio.native.app.v1.0.8.apk',
+[0-0]     'appium:automationName': 'UIAutomator2'
+[0-0]   }
+[0-0] }
+2024-05-29T04:34:04.801Z INFO @wdio/local-runner: Waiting for 0 to shut down gracefully
+2024-05-29T04:34:04.802Z INFO @wdio/local-runner: shutting down
+
+C:\Users\LENOVO\Desktop\mobile-test>taskkill /F /IM node.exe
+SUCCESS: The process "node.exe" with PID 7648 has been terminated.
+
+C:\Users\LENOVO\Desktop\mobile-test>npx wdio run wdio.conf.js
+
+Execution of 1 workers started at 2024-05-29T04:34:24.555Z
+
+2024-05-29T04:34:26.140Z INFO @wdio/cli:launcher: Run onPrepare hook
+2024-05-29T04:34:26.177Z INFO @wdio/appium-service: Will spawn Appium process: cmd /c node C:\Users\LENOVO\node_modules\appium\index.js --base-path /
+2024-05-29T04:34:31.274Z INFO @wdio/appium-service: Appium started with ID: 3668
+2024-05-29T04:34:31.280Z INFO @wdio/cli:launcher: Run onWorkerStart hook
+2024-05-29T04:34:31.284Z INFO @wdio/local-runner: Start worker 0-0 with arg: run,wdio.conf.js
+[0-0] 2024-05-29T04:34:36.303Z INFO @wdio/local-runner: Run worker command: run
+[0-0] 2024-05-29T04:34:36.866Z WARN @wdio/mocha-framework: Unable to load spec files quite likely because they rely on `browser` object that is not fully initialized.
+[0-0] `browser` object has only `capabilities` and some flags like `isMobile`.
+[0-0] Helper files that use other `browser` commands have to be moved to `before` hook.
+[0-0] Spec file(s): file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+[0-0] Error: ReferenceError: $ is not defined
+[0-0]     at file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js?invalidateCache=0.6729918413129494:5:24
+[0-0]     at ModuleJob.run (node:internal/modules/esm/module_job:222:25)
+[0-0]     at async ModuleLoader.import (node:internal/modules/esm/loader:316:24)
+[0-0]     at async formattedImport (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:9:14)
+[0-0]     at async Object.exports.requireOrImport (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:42:28)
+[0-0]     at async Object.exports.loadFilesAsync (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:100:20)
+[0-0]     at async MochaAdapter._loadFiles (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:72:13)
+[0-0]     at async MochaAdapter.init (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:66:9)
+[0-0]     at async Object.adapterFactory.init (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:222:22)
+[0-0]     at async Runner.run (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/runner/build/index.js:83:27)
+[0-0] RUNNING in Android - file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+[0-0] 2024-05-29T04:34:36.868Z INFO webdriver: Initiate new session using the WebDriver protocol
+[0-0] 2024-05-29T04:34:36.869Z INFO @wdio/utils: Connecting to existing driver at http://127.0.0.1:4723/
+[0-0] 2024-05-29T04:34:37.297Z INFO webdriver: [POST] http://127.0.0.1:4723/session
+[0-0] 2024-05-29T04:34:37.297Z INFO webdriver: DATA {
+[0-0]   capabilities: {
+[0-0]     alwaysMatch: {
+[0-0]       platformName: 'Android',
+[0-0]       'appium:platformVersion': '11',
+[0-0]       'appium:deviceName': 'emulator-5554',
+[0-0]       'appium:app': './android.wdio.native.app.v1.0.8.apk',
+[0-0]       'appium:automationName': 'UIAutomator2'
+[0-0]     },
+[0-0]     firstMatch: [ {} ]
+[0-0]   },
+[0-0]   desiredCapabilities: {
+[0-0]     platformName: 'Android',
+[0-0]     'appium:platformVersion': '11',
+[0-0]     'appium:deviceName': 'emulator-5554',
+[0-0]     'appium:app': './android.wdio.native.app.v1.0.8.apk',
+[0-0]     'appium:automationName': 'UIAutomator2'
+[0-0]   }
+[0-0] }
+[0-0] 2024-05-29T04:34:59.096Z ERROR @wdio/runner: Error: Unable to load spec files quite likely because they rely on `browser` object that is not fully initialized.
+[0-0] `browser` object has only `capabilities` and some flags like `isMobile`.
+[0-0] Helper files that use other `browser` commands have to be moved to `before` hook.
+[0-0] Spec file(s): file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+[0-0] Error: ReferenceError: $ is not defined
+[0-0]     at file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js?invalidateCache=0.6729918413129494:5:24
+[0-0]     at ModuleJob.run (node:internal/modules/esm/module_job:222:25)
+[0-0]     at async ModuleLoader.import (node:internal/modules/esm/loader:316:24)
+[0-0]     at async formattedImport (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:9:14)
+[0-0]     at async Object.exports.requireOrImport (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:42:28)
+[0-0]     at async Object.exports.loadFilesAsync (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:100:20)
+[0-0]     at async MochaAdapter._loadFiles (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:72:13)
+[0-0]     at async MochaAdapter.init (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:66:9)
+[0-0]     at async Object.adapterFactory.init (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:222:22)
+[0-0]     at async Runner.run (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/runner/build/index.js:83:27)
+[0-0]     at MochaAdapter._loadFiles (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:91:35)
+[0-0]     at async MochaAdapter.init (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:66:9)
+[0-0]     at async Object.adapterFactory.init (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:222:22)
+[0-0]     at async Runner.run (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/runner/build/index.js:83:27)
+[0-0]  Error:  Unable to load spec files quite likely because they rely on `browser` object that is not fully initialized.
+`browser` object has only `capabilities` and some flags like `isMobile`.
+Helper files that use other `browser` commands have to be moved to `before` hook.
+Spec file(s): file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+Error: ReferenceError: $ is not defined
+    at file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js?invalidateCache=0.6729918413129494:5:24
+    at ModuleJob.run (node:internal/modules/esm/module_job:222:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:316:24)
+    at async formattedImport (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:9:14)
+    at async Object.exports.requireOrImport (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:42:28)
+    at async Object.exports.loadFilesAsync (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:100:20)
+    at async MochaAdapter._loadFiles (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:72:13)
+    at async MochaAdapter.init (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:66:9)
+    at async Object.adapterFactory.init (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:222:22)
+    at async Runner.run (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/runner/build/index.js:83:27)
+[0-0] 2024-05-29T04:34:59.108Z INFO webdriver: COMMAND deleteSession()
+[0-0] 2024-05-29T04:34:59.192Z INFO webdriver: [DELETE] http://127.0.0.1:4723/session/53387c45-6a9a-48fd-941d-13dd32c956b8
+[0-0] 2024-05-29T04:35:01.091Z INFO webdriver: RESULT null
+[0-0] FAILED in Android - file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+2024-05-29T04:35:01.246Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
+2024-05-29T04:35:01.262Z INFO @wdio/cli:launcher: Run onComplete hook
+2024-05-29T04:35:01.268Z INFO @wdio/appium-service: Appium (pid: 3668) killed
+
+Spec Files:      0 passed, 1 failed, 1 total (100% completed) in 00:00:36
+
+2024-05-29T04:35:01.306Z INFO @wdio/local-runner: Shutting down spawned worker
+2024-05-29T04:35:01.316Z ERROR @wdio/appium-service: Appium exited before timeout (exit code: null)
+2024-05-29T04:35:01.571Z INFO @wdio/local-runner: Waiting for 0 to shut down gracefully
+2024-05-29T04:35:01.572Z INFO @wdio/local-runner: shutting down
+
+C:\Users\LENOVO\Desktop\mobile-test>
+C:\Users\LENOVO\Desktop\mobile-test>taskkill /F /IM node.exe
+SUCCESS: The process "node.exe" with PID 10312 has been terminated.
+
+C:\Users\LENOVO\Desktop\mobile-test>npx wdio run wdio.conf.js
+
+Execution of 1 workers started at 2024-05-29T04:36:32.908Z
+
+2024-05-29T04:36:34.552Z INFO @wdio/cli:launcher: Run onPrepare hook
+2024-05-29T04:36:34.590Z INFO @wdio/appium-service: Will spawn Appium process: cmd /c node C:\Users\LENOVO\node_modules\appium\index.js --base-path /
+2024-05-29T04:36:39.279Z INFO @wdio/appium-service: Appium started with ID: 12388
+2024-05-29T04:36:39.285Z INFO @wdio/cli:launcher: Run onWorkerStart hook
+2024-05-29T04:36:39.287Z INFO @wdio/local-runner: Start worker 0-0 with arg: run,wdio.conf.js
+[0-0] 2024-05-29T04:36:54.587Z INFO @wdio/local-runner: Run worker command: run
+[0-0] 2024-05-29T04:36:55.147Z WARN @wdio/mocha-framework: Unable to load spec files quite likely because they rely on `browser` object that is not fully initialized.
+[0-0] `browser` object has only `capabilities` and some flags like `isMobile`.
+[0-0] Helper files that use other `browser` commands have to be moved to `before` hook.
+[0-0] Spec file(s): file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+[0-0] Error: ReferenceError: $ is not defined
+[0-0]     at file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js?invalidateCache=0.5506280290548278:3:24
+[0-0]     at ModuleJob.run (node:internal/modules/esm/module_job:222:25)
+[0-0]     at async ModuleLoader.import (node:internal/modules/esm/loader:316:24)
+[0-0]     at async formattedImport (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:9:14)
+[0-0]     at async Object.exports.requireOrImport (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:42:28)
+[0-0]     at async Object.exports.loadFilesAsync (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:100:20)
+[0-0]     at async MochaAdapter._loadFiles (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:72:13)
+[0-0]     at async MochaAdapter.init (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:66:9)
+[0-0]     at async Object.adapterFactory.init (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:222:22)
+[0-0]     at async Runner.run (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/runner/build/index.js:83:27)
+[0-0] RUNNING in Android - file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+[0-0] 2024-05-29T04:36:55.150Z INFO webdriver: Initiate new session using the WebDriver protocol
+[0-0] 2024-05-29T04:36:55.150Z INFO @wdio/utils: Connecting to existing driver at http://127.0.0.1:4723/
+[0-0] 2024-05-29T04:36:55.508Z INFO webdriver: [POST] http://127.0.0.1:4723/session
+[0-0] 2024-05-29T04:36:55.509Z INFO webdriver: DATA {
+[0-0]   capabilities: {
+[0-0]     alwaysMatch: {
+[0-0]       platformName: 'Android',
+[0-0]       'appium:platformVersion': '11',
+[0-0]       'appium:deviceName': 'emulator-5554',
+[0-0]       'appium:app': './android.wdio.native.app.v1.0.8.apk',
+[0-0]       'appium:automationName': 'UIAutomator2'
+[0-0]     },
+[0-0]     firstMatch: [ {} ]
+[0-0]   },
+[0-0]   desiredCapabilities: {
+[0-0]     platformName: 'Android',
+[0-0]     'appium:platformVersion': '11',
+[0-0]     'appium:deviceName': 'emulator-5554',
+[0-0]     'appium:app': './android.wdio.native.app.v1.0.8.apk',
+[0-0]     'appium:automationName': 'UIAutomator2'
+[0-0]   }
+[0-0] }
+[0-0] 2024-05-29T04:37:05.753Z ERROR @wdio/runner: Error: Unable to load spec files quite likely because they rely on `browser` object that is not fully initialized.
+[0-0] `browser` object has only `capabilities` and some flags like `isMobile`.
+[0-0] Helper files that use other `browser` commands have to be moved to `before` hook.
+[0-0] Spec file(s): file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+[0-0] Error: ReferenceError: $ is not defined
+[0-0]     at file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js?invalidateCache=0.5506280290548278:3:24
+[0-0]     at ModuleJob.run (node:internal/modules/esm/module_job:222:25)
+[0-0]     at async ModuleLoader.import (node:internal/modules/esm/loader:316:24)
+[0-0]     at async formattedImport (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:9:14)
+[0-0]     at async Object.exports.requireOrImport (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:42:28)
+[0-0]     at async Object.exports.loadFilesAsync (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:100:20)
+[0-0]     at async MochaAdapter._loadFiles (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:72:13)
+[0-0]     at async MochaAdapter.init (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:66:9)
+[0-0]     at async Object.adapterFactory.init (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:222:22)
+[0-0]     at async Runner.run (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/runner/build/index.js:83:27)
+[0-0]     at MochaAdapter._loadFiles (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:91:35)
+[0-0]     at async MochaAdapter.init (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:66:9)
+[0-0]     at async Object.adapterFactory.init (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:222:22)
+[0-0]     at async Runner.run (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/runner/build/index.js:83:27)
+[0-0]  Error:  Unable to load spec files quite likely because they rely on `browser` object that is not fully initialized.
+`browser` object has only `capabilities` and some flags like `isMobile`.
+Helper files that use other `browser` commands have to be moved to `before` hook.
+Spec file(s): file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+Error: ReferenceError: $ is not defined
+    at file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js?invalidateCache=0.5506280290548278:3:24
+    at ModuleJob.run (node:internal/modules/esm/module_job:222:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:316:24)
+    at async formattedImport (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:9:14)
+    at async Object.exports.requireOrImport (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:42:28)
+    at async Object.exports.loadFilesAsync (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:100:20)
+    at async MochaAdapter._loadFiles (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:72:13)
+    at async MochaAdapter.init (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:66:9)
+    at async Object.adapterFactory.init (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:222:22)
+    at async Runner.run (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/runner/build/index.js:83:27)
+[0-0] 2024-05-29T04:37:05.756Z INFO webdriver: COMMAND deleteSession()
+[0-0] 2024-05-29T04:37:05.871Z INFO webdriver: [DELETE] http://127.0.0.1:4723/session/81d35b0f-3185-4bcc-b0a5-2816cb283f0c
+[0-0] 2024-05-29T04:37:08.114Z INFO webdriver: RESULT null
+[0-0] FAILED in Android - file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+2024-05-29T04:37:08.257Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
+2024-05-29T04:37:08.259Z INFO @wdio/cli:launcher: Run onComplete hook
+2024-05-29T04:37:08.261Z INFO @wdio/appium-service: Appium (pid: 12388) killed
+
+Spec Files:      0 passed, 1 failed, 1 total (100% completed) in 00:00:35
+
+2024-05-29T04:37:08.265Z INFO @wdio/local-runner: Shutting down spawned worker
+2024-05-29T04:37:08.266Z ERROR @wdio/appium-service: Appium exited before timeout (exit code: null)
+2024-05-29T04:37:08.532Z INFO @wdio/local-runner: Waiting for 0 to shut down gracefully
+2024-05-29T04:37:08.533Z INFO @wdio/local-runner: shutting down
+
+C:\Users\LENOVO\Desktop\mobile-test>taskkill /F /IM node.exe
+SUCCESS: The process "node.exe" with PID 3224 has been terminated.
+
+C:\Users\LENOVO\Desktop\mobile-test>npx wdio run wdio.conf.js
+
+Execution of 1 workers started at 2024-05-29T04:38:13.727Z
+
+2024-05-29T04:38:15.518Z INFO @wdio/cli:launcher: Run onPrepare hook
+2024-05-29T04:38:15.576Z INFO @wdio/appium-service: Will spawn Appium process: cmd /c node C:\Users\LENOVO\node_modules\appium\index.js --base-path /
+2024-05-29T04:38:20.820Z INFO @wdio/appium-service: Appium started with ID: 6648
+2024-05-29T04:38:20.825Z INFO @wdio/cli:launcher: Run onWorkerStart hook
+2024-05-29T04:38:20.828Z INFO @wdio/local-runner: Start worker 0-0 with arg: run,wdio.conf.js
+[0-0] 2024-05-29T04:38:34.169Z INFO @wdio/local-runner: Run worker command: run
+[0-0] 2024-05-29T04:38:34.878Z WARN @wdio/mocha-framework: Unable to load spec files quite likely because they rely on `browser` object that is not fully initialized.
+[0-0] `browser` object has only `capabilities` and some flags like `isMobile`.
+[0-0] Helper files that use other `browser` commands have to be moved to `before` hook.
+[0-0] Spec file(s): file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+[0-0] Error: ReferenceError: $ is not defined
+[0-0]     at Suite.<anonymous> (file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js?invalidateCache=0.09979172123759716:6:21)
+[0-0]     at Object.create (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\interfaces\common.js:148:19)
+[0-0]     at context.describe.context.context (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\interfaces\bdd.js:42:27)
+[0-0]     at file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js?invalidateCache=0.09979172123759716:4:1
+[0-0]     at ModuleJob.run (node:internal/modules/esm/module_job:222:25)
+[0-0]     at async ModuleLoader.import (node:internal/modules/esm/loader:316:24)
+[0-0]     at async formattedImport (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:9:14)
+[0-0]     at async Object.exports.requireOrImport (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:42:28)
+[0-0]     at async Object.exports.loadFilesAsync (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:100:20)
+[0-0]     at async MochaAdapter._loadFiles (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:72:13)
+[0-0] RUNNING in Android - file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+[0-0] 2024-05-29T04:38:34.881Z INFO webdriver: Initiate new session using the WebDriver protocol
+[0-0] 2024-05-29T04:38:34.882Z INFO @wdio/utils: Connecting to existing driver at http://127.0.0.1:4723/
+[0-0] 2024-05-29T04:38:35.264Z INFO webdriver: [POST] http://127.0.0.1:4723/session
+[0-0] 2024-05-29T04:38:35.264Z INFO webdriver: DATA {
+[0-0]   capabilities: {
+[0-0]     alwaysMatch: {
+[0-0]       platformName: 'Android',
+[0-0]       'appium:platformVersion': '11',
+[0-0]       'appium:deviceName': 'emulator-5554',
+[0-0]       'appium:app': './android.wdio.native.app.v1.0.8.apk',
+[0-0]       'appium:automationName': 'UIAutomator2'
+[0-0]     },
+[0-0]     firstMatch: [ {} ]
+[0-0]   },
+[0-0]   desiredCapabilities: {
+[0-0]     platformName: 'Android',
+[0-0]     'appium:platformVersion': '11',
+[0-0]     'appium:deviceName': 'emulator-5554',
+[0-0]     'appium:app': './android.wdio.native.app.v1.0.8.apk',
+[0-0]     'appium:automationName': 'UIAutomator2'
+[0-0]   }
+[0-0] }
+[0-0] 2024-05-29T04:38:53.870Z ERROR @wdio/runner: Error: Unable to load spec files quite likely because they rely on `browser` object that is not fully initialized.
+[0-0] `browser` object has only `capabilities` and some flags like `isMobile`.
+[0-0] Helper files that use other `browser` commands have to be moved to `before` hook.
+[0-0] Spec file(s): file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+[0-0] Error: ReferenceError: $ is not defined
+[0-0]     at Suite.<anonymous> (file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js?invalidateCache=0.09979172123759716:6:21)
+[0-0]     at Object.create (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\interfaces\common.js:148:19)
+[0-0]     at context.describe.context.context (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\interfaces\bdd.js:42:27)
+[0-0]     at file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js?invalidateCache=0.09979172123759716:4:1
+[0-0]     at ModuleJob.run (node:internal/modules/esm/module_job:222:25)
+[0-0]     at async ModuleLoader.import (node:internal/modules/esm/loader:316:24)
+[0-0]     at async formattedImport (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:9:14)
+[0-0]     at async Object.exports.requireOrImport (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:42:28)
+[0-0]     at async Object.exports.loadFilesAsync (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:100:20)
+[0-0]     at async MochaAdapter._loadFiles (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:72:13)
+[0-0]     at MochaAdapter._loadFiles (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:91:35)
+[0-0]     at async MochaAdapter.init (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:66:9)
+[0-0]     at async Object.adapterFactory.init (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:222:22)
+[0-0]     at async Runner.run (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/runner/build/index.js:83:27)
+[0-0]  Error:  Unable to load spec files quite likely because they rely on `browser` object that is not fully initialized.
+`browser` object has only `capabilities` and some flags like `isMobile`.
+Helper files that use other `browser` commands have to be moved to `before` hook.
+Spec file(s): file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+Error: ReferenceError: $ is not defined
+    at Suite.<anonymous> (file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js?invalidateCache=0.09979172123759716:6:21)
+    at Object.create (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\interfaces\common.js:148:19)
+    at context.describe.context.context (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\interfaces\bdd.js:42:27)
+    at file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js?invalidateCache=0.09979172123759716:4:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:222:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:316:24)
+    at async formattedImport (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:9:14)
+    at async Object.exports.requireOrImport (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:42:28)
+    at async Object.exports.loadFilesAsync (C:\Users\LENOVO\Desktop\mobile-test\node_modules\mocha\lib\nodejs\esm-utils.js:100:20)
+    at async MochaAdapter._loadFiles (file:///C:/Users/LENOVO/Desktop/mobile-test/node_modules/@wdio/mocha-framework/build/index.js:72:13)
+[0-0] 2024-05-29T04:38:53.876Z INFO webdriver: COMMAND deleteSession()
+[0-0] 2024-05-29T04:38:53.879Z INFO webdriver: [DELETE] http://127.0.0.1:4723/session/ae7458b0-e193-41fa-b502-266d83c38dbe
+[0-0] 2024-05-29T04:38:55.166Z INFO webdriver: RESULT null
+[0-0] FAILED in Android - file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+2024-05-29T04:38:55.308Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
+2024-05-29T04:38:55.311Z INFO @wdio/cli:launcher: Run onComplete hook
+2024-05-29T04:38:55.312Z INFO @wdio/appium-service: Appium (pid: 6648) killed
+
+Spec Files:      0 passed, 1 failed, 1 total (100% completed) in 00:00:41
+
+2024-05-29T04:38:55.315Z INFO @wdio/local-runner: Shutting down spawned worker
+2024-05-29T04:38:55.317Z ERROR @wdio/appium-service: Appium exited before timeout (exit code: null)
+2024-05-29T04:38:55.578Z INFO @wdio/local-runner: Waiting for 0 to shut down gracefully
+2024-05-29T04:38:55.579Z INFO @wdio/local-runner: shutting down
+
+C:\Users\LENOVO\Desktop\mobile-test>taskkill /F /IM node.exe
+SUCCESS: The process "node.exe" with PID 12200 has been terminated.
+
+C:\Users\LENOVO\Desktop\mobile-test>npx wdio run wdio.conf.js
+
+Execution of 1 workers started at 2024-05-29T04:39:39.967Z
+
+2024-05-29T04:39:41.813Z INFO @wdio/cli:launcher: Run onPrepare hook
+2024-05-29T04:39:41.852Z INFO @wdio/appium-service: Will spawn Appium process: cmd /c node C:\Users\LENOVO\node_modules\appium\index.js --base-path /
+2024-05-29T04:39:45.767Z INFO @wdio/appium-service: Appium started with ID: 1780
+2024-05-29T04:39:45.772Z INFO @wdio/cli:launcher: Run onWorkerStart hook
+2024-05-29T04:39:45.775Z INFO @wdio/local-runner: Start worker 0-0 with arg: run,wdio.conf.js
+[0-0] 2024-05-29T04:39:49.758Z INFO @wdio/local-runner: Run worker command: run
+[0-0] RUNNING in Android - file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+[0-0] 2024-05-29T04:39:50.357Z INFO webdriver: Initiate new session using the WebDriver protocol
+[0-0] 2024-05-29T04:39:50.358Z INFO @wdio/utils: Connecting to existing driver at http://127.0.0.1:4723/
+[0-0] 2024-05-29T04:39:50.697Z INFO webdriver: [POST] http://127.0.0.1:4723/session
+[0-0] 2024-05-29T04:39:50.698Z INFO webdriver: DATA {
+[0-0]   capabilities: {
+[0-0]     alwaysMatch: {
+[0-0]       platformName: 'Android',
+[0-0]       'appium:platformVersion': '11',
+[0-0]       'appium:deviceName': 'emulator-5554',
+[0-0]       'appium:app': './android.wdio.native.app.v1.0.8.apk',
+[0-0]       'appium:automationName': 'UIAutomator2'
+[0-0]     },
+[0-0]     firstMatch: [ {} ]
+[0-0]   },
+[0-0]   desiredCapabilities: {
+[0-0]     platformName: 'Android',
+[0-0]     'appium:platformVersion': '11',
+[0-0]     'appium:deviceName': 'emulator-5554',
+[0-0]     'appium:app': './android.wdio.native.app.v1.0.8.apk',
+[0-0]     'appium:automationName': 'UIAutomator2'
+[0-0]   }
+[0-0] }
+[0-0] 2024-05-29T04:39:59.842Z INFO webdriver: COMMAND findElement("xpath", "//android.widget.EditText[@content-desc="input-email"]")
+[0-0] 2024-05-29T04:39:59.846Z INFO webdriver: COMMAND findElement("xpath", "//android.widget.EditText[@content-desc="input-password"]")
+[0-0] 2024-05-29T04:39:59.848Z INFO webdriver: COMMAND findElement("xpath", "//android.view.ViewGroup[@content-desc="button-LOGIN"]/android.view.ViewGroup")
+[0-0] 2024-05-29T04:39:59.851Z INFO webdriver: COMMAND findElement("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:39:59.854Z INFO webdriver: COMMAND findElement("xpath", "//android.view.View[@content-desc="Login"]")
+[0-0] 2024-05-29T04:39:59.855Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/element
+[0-0] 2024-05-29T04:39:59.856Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.EditText[@content-desc="input-email"]'
+[0-0] }
+[0-0] 2024-05-29T04:39:59.860Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/element
+[0-0] 2024-05-29T04:39:59.861Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.EditText[@content-desc="input-password"]'
+[0-0] }
+[0-0] 2024-05-29T04:39:59.863Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/element
+[0-0] 2024-05-29T04:39:59.864Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.view.ViewGroup[@content-desc="button-LOGIN"]/android.view.ViewGroup'
+[0-0] }
+[0-0] 2024-05-29T04:39:59.878Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/element
+[0-0] 2024-05-29T04:39:59.881Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:39:59.885Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/element
+[0-0] 2024-05-29T04:39:59.886Z INFO webdriver: DATA { using: 'xpath', value: '//android.view.View[@content-desc="Login"]' }
+[0-0] 2024-05-29T04:40:01.042Z INFO webdriver: RESULT {
+[0-0]   error: 'no such element',
+[0-0]   message: 'An element could not be located on the page using the given search parameters.',
+[0-0]   stacktrace: 'NoSuchElementError: An element could not be located on the page using the given search parameters.\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElOrEls (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\appium-android-driver\\lib\\commands\\find.ts:86:11)\n' +
+[0-0]     '    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\@appium\\base-driver\\lib\\basedriver\\commands\\find.ts:60:12)\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElement (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\@appium\\base-driver\\lib\\basedriver\\commands\\find.ts:75:12)'
+[0-0] }
+[0-0] 2024-05-29T04:40:01.763Z INFO webdriver: RESULT {
+[0-0]   error: 'no such element',
+[0-0]   message: 'An element could not be located on the page using the given search parameters.',
+[0-0]   stacktrace: 'NoSuchElementError: An element could not be located on the page using the given search parameters.\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElOrEls (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\appium-android-driver\\lib\\commands\\find.ts:86:11)\n' +
+[0-0]     '    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\@appium\\base-driver\\lib\\basedriver\\commands\\find.ts:60:12)\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElement (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\@appium\\base-driver\\lib\\basedriver\\commands\\find.ts:75:12)'
+[0-0] }
+[0-0] 2024-05-29T04:40:01.882Z INFO webdriver: RESULT {
+[0-0]   error: 'no such element',
+[0-0]   message: 'An element could not be located on the page using the given search parameters.',
+[0-0]   stacktrace: 'NoSuchElementError: An element could not be located on the page using the given search parameters.\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElOrEls (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\appium-android-driver\\lib\\commands\\find.ts:86:11)\n' +
+[0-0]     '    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\@appium\\base-driver\\lib\\basedriver\\commands\\find.ts:60:12)\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElement (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\@appium\\base-driver\\lib\\basedriver\\commands\\find.ts:75:12)'
+[0-0] }
+[0-0] 2024-05-29T04:40:01.987Z INFO webdriver: RESULT {
+[0-0]   error: 'no such element',
+[0-0]   message: 'An element could not be located on the page using the given search parameters.',
+[0-0]   stacktrace: 'NoSuchElementError: An element could not be located on the page using the given search parameters.\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElOrEls (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\appium-android-driver\\lib\\commands\\find.ts:86:11)\n' +
+[0-0]     '    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\@appium\\base-driver\\lib\\basedriver\\commands\\find.ts:60:12)\n' +
+[0-0]     '    at AndroidUiautomator2Driver.findElement (C:\\Users\\LENOVO\\node_modules\\appium-uiautomator2-driver\\node_modules\\@appium\\base-driver\\lib\\basedriver\\commands\\find.ts:75:12)'
+[0-0] }
+[0-0] 2024-05-29T04:40:02.137Z INFO webdriver: RESULT {
+[0-0]   'element-6066-11e4-a52e-4f735466cecf': '00000000-0000-0044-ffff-ffff0000002c',
+[0-0]   ELEMENT: '00000000-0000-0044-ffff-ffff0000002c'
+[0-0] }
+[0-0] 2024-05-29T04:40:02.146Z INFO webdriver: COMMAND elementClick("00000000-0000-0044-ffff-ffff0000002c")
+[0-0] 2024-05-29T04:40:02.155Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/element/00000000-0000-0044-ffff-ffff0000002c/click
+[0-0] 2024-05-29T04:40:02.370Z INFO webdriver: RESULT null
+[0-0] 2024-05-29T04:40:02.380Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.EditText[@content-desc="input-email"]")
+[0-0] 2024-05-29T04:40:02.414Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/elements
+[0-0] 2024-05-29T04:40:02.415Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.EditText[@content-desc="input-email"]'
+[0-0] }
+[0-0] 2024-05-29T04:40:02.687Z INFO webdriver: RESULT []
+[0-0] 2024-05-29T04:40:02.897Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.EditText[@content-desc="input-email"]")
+[0-0] 2024-05-29T04:40:02.918Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/elements
+[0-0] 2024-05-29T04:40:02.919Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.EditText[@content-desc="input-email"]'
+[0-0] }
+[0-0] 2024-05-29T04:40:03.391Z INFO webdriver: RESULT [
+[0-0]   {
+[0-0]     'element-6066-11e4-a52e-4f735466cecf': '00000000-0000-0044-ffff-ffff00000059',
+[0-0]     ELEMENT: '00000000-0000-0044-ffff-ffff00000059'
+[0-0]   }
+[0-0] ]
+[0-0] 2024-05-29T04:40:03.401Z INFO webdriver: COMMAND findElement("xpath", "//android.widget.EditText[@content-desc="input-email"]")
+[0-0] 2024-05-29T04:40:03.405Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/element
+[0-0] 2024-05-29T04:40:03.405Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.EditText[@content-desc="input-email"]'
+[0-0] }
+[0-0] 2024-05-29T04:40:03.531Z INFO webdriver: RESULT {
+[0-0]   'element-6066-11e4-a52e-4f735466cecf': '00000000-0000-0044-ffff-ffff00000059',
+[0-0]   ELEMENT: '00000000-0000-0044-ffff-ffff00000059'
+[0-0] }
+[0-0] 2024-05-29T04:40:03.539Z INFO webdriver: COMMAND elementClear("00000000-0000-0044-ffff-ffff00000059")
+[0-0] 2024-05-29T04:40:03.550Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/element/00000000-0000-0044-ffff-ffff00000059/clear
+[0-0] 2024-05-29T04:40:03.593Z INFO webdriver: RESULT null
+[0-0] 2024-05-29T04:40:03.597Z INFO webdriver: COMMAND elementSendKeys("00000000-0000-0044-ffff-ffff00000059", "test@gmail.com")
+[0-0] 2024-05-29T04:40:03.600Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/element/00000000-0000-0044-ffff-ffff00000059/value
+[0-0] 2024-05-29T04:40:03.600Z INFO webdriver: DATA { text: 'test@gmail.com' }
+[0-0] 2024-05-29T04:40:04.627Z INFO webdriver: RESULT null
+[0-0] 2024-05-29T04:40:04.631Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.EditText[@content-desc="input-password"]")
+[0-0] 2024-05-29T04:40:04.640Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/elements
+[0-0] 2024-05-29T04:40:04.640Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.EditText[@content-desc="input-password"]'
+[0-0] }
+[0-0] 2024-05-29T04:40:05.187Z INFO webdriver: RESULT [
+[0-0]   {
+[0-0]     'element-6066-11e4-a52e-4f735466cecf': '00000000-0000-0044-ffff-ffff0000005d',
+[0-0]     ELEMENT: '00000000-0000-0044-ffff-ffff0000005d'
+[0-0]   }
+[0-0] ]
+[0-0] 2024-05-29T04:40:05.194Z INFO webdriver: COMMAND findElement("xpath", "//android.widget.EditText[@content-desc="input-password"]")
+[0-0] 2024-05-29T04:40:05.197Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/element
+[0-0] 2024-05-29T04:40:05.198Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.EditText[@content-desc="input-password"]'
+[0-0] }
+[0-0] 2024-05-29T04:40:05.318Z INFO webdriver: RESULT {
+[0-0]   'element-6066-11e4-a52e-4f735466cecf': '00000000-0000-0044-ffff-ffff0000005d',
+[0-0]   ELEMENT: '00000000-0000-0044-ffff-ffff0000005d'
+[0-0] }
+[0-0] 2024-05-29T04:40:05.324Z INFO webdriver: COMMAND elementClear("00000000-0000-0044-ffff-ffff0000005d")
+[0-0] 2024-05-29T04:40:05.326Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/element/00000000-0000-0044-ffff-ffff0000005d/clear
+[0-0] 2024-05-29T04:40:05.362Z INFO webdriver: RESULT null
+[0-0] 2024-05-29T04:40:05.366Z INFO webdriver: COMMAND elementSendKeys("00000000-0000-0044-ffff-ffff0000005d", "password123")
+[0-0] 2024-05-29T04:40:05.374Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/element/00000000-0000-0044-ffff-ffff0000005d/value
+[0-0] 2024-05-29T04:40:05.374Z INFO webdriver: DATA { text: 'password123' }
+[0-0] 2024-05-29T04:40:06.381Z INFO webdriver: RESULT null
+[0-0] 2024-05-29T04:40:06.384Z INFO webdriver: COMMAND findElements("xpath", "//android.view.ViewGroup[@content-desc="button-LOGIN"]/android.view.ViewGroup")
+[0-0] 2024-05-29T04:40:06.388Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/elements
+[0-0] 2024-05-29T04:40:06.388Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.view.ViewGroup[@content-desc="button-LOGIN"]/android.view.ViewGroup'
+[0-0] }
+[0-0] 2024-05-29T04:40:06.951Z INFO webdriver: RESULT [
+[0-0]   {
+[0-0]     'element-6066-11e4-a52e-4f735466cecf': '00000000-0000-0044-ffff-ffff00000061',
+[0-0]     ELEMENT: '00000000-0000-0044-ffff-ffff00000061'
+[0-0]   }
+[0-0] ]
+[0-0] 2024-05-29T04:40:06.958Z INFO webdriver: COMMAND findElement("xpath", "//android.view.ViewGroup[@content-desc="button-LOGIN"]/android.view.ViewGroup")
+[0-0] 2024-05-29T04:40:06.960Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/element
+[0-0] 2024-05-29T04:40:06.961Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.view.ViewGroup[@content-desc="button-LOGIN"]/android.view.ViewGroup'
+[0-0] }
+[0-0] 2024-05-29T04:40:07.072Z INFO webdriver: RESULT {
+[0-0]   'element-6066-11e4-a52e-4f735466cecf': '00000000-0000-0044-ffff-ffff00000061',
+[0-0]   ELEMENT: '00000000-0000-0044-ffff-ffff00000061'
+[0-0] }
+[0-0] 2024-05-29T04:40:07.078Z INFO webdriver: COMMAND elementClick("00000000-0000-0044-ffff-ffff00000061")
+[0-0] 2024-05-29T04:40:07.082Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/element/00000000-0000-0044-ffff-ffff00000061/click
+[0-0] 2024-05-29T04:40:07.171Z INFO webdriver: RESULT null
+[0-0] 2024-05-29T04:40:07.179Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:40:07.182Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/elements
+[0-0] 2024-05-29T04:40:07.182Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:40:07.596Z INFO webdriver: RESULT []
+[0-0] 2024-05-29T04:40:08.103Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:40:08.108Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/elements
+[0-0] 2024-05-29T04:40:08.108Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:40:08.294Z INFO webdriver: RESULT []
+[0-0] 2024-05-29T04:40:08.802Z INFO webdriver: COMMAND findElements("xpath", "//android.widget.TextView[@resource-id="android:id/message"]")
+[0-0] 2024-05-29T04:40:08.811Z INFO webdriver: [POST] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a/elements
+[0-0] 2024-05-29T04:40:08.812Z INFO webdriver: DATA {
+[0-0]   using: 'xpath',
+[0-0]   value: '//android.widget.TextView[@resource-id="android:id/message"]'
+[0-0] }
+[0-0] 2024-05-29T04:40:09.628Z INFO webdriver: RESULT [
+[0-0]   {
+[0-0]     'element-6066-11e4-a52e-4f735466cecf': '00000000-0000-0047-ffff-ffff00000072',
+[0-0]     ELEMENT: '00000000-0000-0047-ffff-ffff00000072'
+[0-0]   }
+[0-0] ]
+[0-0] 2024-05-29T04:40:09.647Z INFO webdriver: COMMAND deleteSession()
+[0-0] 2024-05-29T04:40:09.649Z INFO webdriver: [DELETE] http://127.0.0.1:4723/session/022ca812-2695-4a3e-b612-da377062e78a
+[0-0] 2024-05-29T04:40:10.401Z INFO webdriver: RESULT null
+[0-0] PASSED in Android - file:///C:/Users/LENOVO/Desktop/mobile-test/test/specs/test.e2e.js
+2024-05-29T04:40:10.575Z INFO @wdio/cli:launcher: Run onWorkerEnd hook
+2024-05-29T04:40:10.577Z INFO @wdio/cli:launcher: Run onComplete hook
+2024-05-29T04:40:10.579Z INFO @wdio/appium-service: Appium (pid: 1780) killed
+
+ "spec" Reporter:
+------------------------------------------------------------------
+[./android.wdio.native.app.v1.0.8.apk Android #0-0] Running: ./android.wdio.native.app.v1.0.8.apk on Android
+[./android.wdio.native.app.v1.0.8.apk Android #0-0] Session ID: 022ca812-2695-4a3e-b612-da377062e78a
+[./android.wdio.native.app.v1.0.8.apk Android #0-0]
+[./android.wdio.native.app.v1.0.8.apk Android #0-0] » \test\specs\test.e2e.js
+[./android.wdio.native.app.v1.0.8.apk Android #0-0] Positive Test
+[./android.wdio.native.app.v1.0.8.apk Android #0-0]    ✓ Normal Login
+[./android.wdio.native.app.v1.0.8.apk Android #0-0]
+[./android.wdio.native.app.v1.0.8.apk Android #0-0] 1 passing (10.5s)
+
+
+Spec Files:      1 passed, 1 total (100% completed) in 00:00:30
+
+2024-05-29T04:40:10.586Z INFO @wdio/local-runner: Shutting down spawned worker
+2024-05-29T04:40:10.598Z ERROR @wdio/appium-service: Appium exited before timeout (exit code: null)
+2024-05-29T04:40:10.854Z INFO @wdio/local-runner: Waiting for 0 to shut down gracefully
+2024-05-29T04:40:10.854Z INFO @wdio/local-runner: shutting down
+
+C:\Users\LENOVO\Desktop\mobile-test>npx allure serve allure-results
+npm ERR! could not determine executable to run
+
+npm ERR! A complete log of this run can be found in: C:\Users\LENOVO\AppData\Local\npm-cache\_logs\2024-05-29T04_41_34_855Z-debug-0.log
+
+C:\Users\LENOVO\Desktop\mobile-test>npm install -g allure-commandline --save-dev
+
+added 1 package in 15s
+
+C:\Users\LENOVO\Desktop\mobile-test>npx allure serve allure-results
+
+ERROR: JAVA_HOME is set to an invalid directory: C:\Program Files\Java\jdk-21\bin
+
+Please set the JAVA_HOME variable in your environment to match the
+location of your Java installation.
+
+C:\Users\LENOVO\Desktop\mobile-test>npx allure serve allure-results
+
+ERROR: JAVA_HOME is set to an invalid directory: C:\Program Files\Java\jdk-21\bin
+
+Please set the JAVA_HOME variable in your environment to match the
+location of your Java installation.
+npx allure serve allure-results
+C:\Users\LENOVO\Desktop\mobile-test>
